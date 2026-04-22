@@ -1,0 +1,144 @@
+import React, { FunctionComponent } from 'react'
+import { Global, css } from '@emotion/react'
+
+const defaultStyle = css`
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section {
+    display: block;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Pretendard, system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+      'Helvetica Neue', sans-serif;
+    color: #333;
+  }
+  html,
+  body,
+  #___gatsby,
+  #gatsby-focus-wrapper {
+    height: 100%;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    background-color: transparent;
+    appearance: none;
+    font-family: inherit;
+    font-size: 100%;
+    cursor: pointer;
+  }
+  input[type='text'],
+  input[type='password'] {
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    appearance: none;
+    font-family: inherit;
+  }
+`
+
+const GlobalStyle: FunctionComponent = function () {
+  return <Global styles={defaultStyle} />
+}
+
+export default GlobalStyle

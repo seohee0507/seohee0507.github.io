@@ -1,0 +1,223 @@
+import React, { FunctionComponent } from 'react'
+import styled from '@emotion/styled'
+import { breakpoints } from 'types/breakpoints'
+
+interface PostContentProps {
+  html: string
+}
+
+const MarkdownRenderer = styled.div`
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 1.25rem 5.75rem;
+  word-break: break-all;
+  line-height: 1.5;
+  font-weight: 400;
+
+  h2 {
+    margin-bottom: 1.625rem;
+    padding-top: 3.125rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    & .link-headers.before {
+      top: 3.125rem;
+    }
+    ${breakpoints.mobile} {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  }
+  h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    ${breakpoints.mobile} {
+      font-size: 1rem;
+    }
+  }
+  h4 {
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    padding: 0.25rem 0;
+    ${breakpoints.mobile} {
+      font-size: 0.875rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  blockquote {
+    margin: 2rem 0;
+    padding: 0.875rem 1.5rem;
+    background-color: #f6f7fb;
+    border-radius: 0.25rem;
+    ${breakpoints.mobile} {
+      padding: 0.5rem 1rem;
+      margin: 1rem 0;
+    }
+  }
+
+  ol,
+  ul {
+    margin: 1.25rem 0;
+    padding-left: 1.5rem;
+  }
+  li {
+    margin: 0.75rem 0;
+    > ul {
+      margin: 0;
+    }
+    ${breakpoints.mobile} {
+      font-size: 0.875rem;
+    }
+  }
+  ul li::marker {
+    color: #c4c9dd;
+  }
+
+  * {
+    & + h2 {
+      margin-top: 3.75rem;
+      ${breakpoints.mobile} {
+        margin-top: 0;
+      }
+    }
+    & + h3 {
+      margin-top: 2rem;
+      ${breakpoints.mobile} {
+        margin-top: 1.5rem;
+      }
+    }
+    & + h4 {
+      margin-top: 1.5rem;
+    }
+    & + ol,
+    & + ul {
+      margin-top: 1rem;
+    }
+  }
+
+  hr {
+    & + h2,
+    & + h3,
+    & + h4 {
+      margin-top: 0;
+    }
+  }
+  .contains-task-list {
+    list-style: none;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    table {
+      min-width: 600px;
+    }
+  }
+  table {
+    margin-top: 1.5rem;
+    border-collapse: collapse;
+    border: 1px solid #ebeef7;
+  }
+  table thead tr {
+    border-bottom: 2px solid #ebeef7;
+    background-color: #ebeef7;
+  }
+  table tr:not(:last-of-type) {
+    border-bottom: 1px solid #ebeef7;
+  }
+  table th {
+    padding: 0.625rem 1rem 0.375rem;
+    ${breakpoints.mobile} {
+      font-size: 0.875rem;
+    }
+  }
+  table td {
+    padding: 0.625rem 1rem;
+    ${breakpoints.mobile} {
+      font-size: 0.875rem;
+    }
+  }
+
+  hr {
+    border: 1px solid #ebeef7;
+    margin: 6.25rem 0;
+  }
+
+  a {
+    color: #5369ad;
+    text-decoration: underline;
+    &:hover {
+      color: #2b3d74;
+    }
+  }
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    tab-size: 2;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+  *:not(pre) > code[class*='language-'] {
+    padding: 0.2rem 0.375rem;
+  }
+
+  .gatsby-highlight {
+    position: relative;
+  }
+  .gatsby-highlight:after {
+    position: absolute;
+    padding: 0 4px;
+    right: 6px;
+    top: 6px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    color: #ccc;
+    font-size: 10px;
+  }
+  .gatsby-highlight[data-language='markdown']:after {
+    content: 'Markdown';
+  }
+  .gatsby-highlight[data-language='html']:after {
+    content: 'HTML';
+  }
+  .gatsby-highlight[data-language='tsx']:after {
+    content: 'tsx';
+  }
+  .gatsby-highlight[data-language='css']:after {
+    content: 'CSS';
+  }
+  .gatsby-highlight[data-language='javascript']:after {
+    content: 'Javscript';
+  }
+  .gatsby-highlight[data-language='js']:after {
+    content: 'JS';
+  }
+  .gatsby-highlight[data-language='json']:after {
+    content: 'JSON';
+  }
+
+  .gatsby-code-title {
+    margin-bottom: -0.6rem;
+    padding: 0.5em 1rem;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    background-color: #2d2d2d;
+    border-bottom: 6px solid #222;
+    color: #ccc;
+    z-index: 0;
+    font-size: 0.8125rem;
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+  }
+`
+
+const PostContent: FunctionComponent<PostContentProps> = ({ html }) => {
+  return <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+export default PostContent
