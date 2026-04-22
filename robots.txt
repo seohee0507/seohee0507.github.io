@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://seohee0507.github.io/gatsby-archive/sitemap-index.xml
+Host: https://seohee0507.github.io
