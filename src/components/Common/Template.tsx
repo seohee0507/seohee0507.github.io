@@ -34,31 +34,22 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
 
         <link rel="icon" href="/gatsby-archive/favicon.ico" />
-        <link
-          rel="icon"
-          href="/gatsby-archive/favicon.png"
-          type="image/png"
-          sizes="32x32"
-        />
-        <link
-          rel="apple-touch-icon"
-          href="//gatsby-archive/apple-touch-icon.png"
-          sizes="180x180"
-        />
+        <link rel="icon" href="/gatsby-archive/favicon.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="//gatsby-archive/apple-touch-icon.png" sizes="180x180" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={image} />
-        <meta property="og:url" content={url} />
-        <meta property="og:site_name" content={title} />
+        <meta property="og:title" content={`https://seohee0507.github.io/${title}`} />
+        <meta property="og:description" content={`https://seohee0507.github.io/${description}`} />
+        <meta property="og:image" content={`https://seohee0507.github.io/${image}`} />
+        <meta property="og:url" content={`https://seohee0507.github.io/${url}`} />
+        <meta property="og:site_name" content={`https://seohee0507.github.io/${title}`} />
 
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={image} />
-        <meta name="twitter:site" content="@me" />
-        <meta name="twitter:creator" content="@me" />
+        <meta name="twitter:title" content={`https://seohee0507.github.io/${title}`} />
+        <meta name="twitter:description" content={`https://seohee0507.github.io/${description}`} />
+        <meta name="twitter:image" content={`https://seohee0507.github.io/${image}`} />
+        <meta name="twitter:site" content="`https://seohee0507.github.io/${url}`" />
+        <meta name="twitter:creator" content="SEOHEE" />
 
         <html lang="ko" />
       </Helmet>
