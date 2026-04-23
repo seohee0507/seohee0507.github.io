@@ -38,17 +38,17 @@ const Template: FunctionComponent<TemplateProps> = ({
         <link rel="apple-touch-icon" href="//gatsby-archive/apple-touch-icon.png" sizes="180x180" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={`https://seohee0507.github.io/${title}`} />
-        <meta property="og:description" content={`https://seohee0507.github.io/${description}`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta property="og:image" content={`https://seohee0507.github.io/${image}`} />
-        <meta property="og:url" content={`https://seohee0507.github.io/${url}`} />
-        <meta property="og:site_name" content={`https://seohee0507.github.io/${title}`} />
+        <meta property="og:url" content={url} />
+        <meta property="og:site_name" content={title} />
 
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={`https://seohee0507.github.io/${title}`} />
-        <meta name="twitter:description" content={`https://seohee0507.github.io/${description}`} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={`https://seohee0507.github.io/${image}`} />
-        <meta name="twitter:site" content="`https://seohee0507.github.io/${url}`" />
+        <meta name="twitter:site" content={url} />
         <meta name="twitter:creator" content="SEOHEE" />
 
         <html lang="ko" />
