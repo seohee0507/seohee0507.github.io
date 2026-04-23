@@ -41,6 +41,8 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={`https://seohee0507.github.io${image}`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content={url} />
         <meta property="og:site_name" content={title} />
 
