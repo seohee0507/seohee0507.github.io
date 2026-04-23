@@ -15,6 +15,7 @@ const DropdownWrapper = styled.div`
   position: relative;
   font-size: 14px;
 `
+
 const DropdownButton = styled.button<{ isOpen: boolean }>`
   position: relative;
   display: block;
@@ -71,8 +72,7 @@ const DropdownList = styled.ul<DropdownListProps>`
 		opacity:1;
 		pointer-events:auto;
 	`};
-  transition: ${({ dropUp }) => (dropUp ? 'bottom' : 'top')} 0.2s,
-    opacity 0.25s ease;
+  transition: ${({ dropUp }) => (dropUp ? 'bottom' : 'top')} 0.2s, opacity 0.25s ease;
 `
 const DropdownItem = styled.li`
   padding: 8px 12px;
@@ -130,12 +130,7 @@ function Dropdown({ initLabel, items, isSelected }: DropdownProps) {
         {selected ? selected.label : initLabel}
       </DropdownButton>
 
-      <DropdownList
-        ref={listRef}
-        height={listHeight}
-        isOpen={isOpen}
-        dropUp={dropUp}
-      >
+      <DropdownList ref={listRef} height={listHeight} isOpen={isOpen} dropUp={dropUp}>
         {items.map(item => (
           <DropdownItem key={item.value} onClick={() => itemHandler(item)}>
             {item.label}
