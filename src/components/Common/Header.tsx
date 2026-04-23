@@ -49,7 +49,7 @@ const Header: FunctionComponent = function () {
     <HeaderWrapper>
       <HeaderInner>
         <Logo>
-          <Link to="/">Archive</Link>
+          <Link to="/">SEOHEE Archive</Link>
         </Logo>
         <Search />
       </HeaderInner>

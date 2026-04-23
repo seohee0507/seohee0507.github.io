@@ -3,7 +3,7 @@ date: '2026-04-21'
 title: 'Quick Markup'
 categories: ['Web Fundamentals']
 summary: '이벤트 핸들링 최적화, OG Tag'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './quick-markup.png'
 ---
 
 ## Event Resize, Scroll 최적화

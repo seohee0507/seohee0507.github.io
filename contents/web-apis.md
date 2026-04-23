@@ -3,7 +3,7 @@ date: '2025-09-26'
 title: 'Web APIs'
 categories: ['Web Fundamentals']
 summary: 'DOM 요소, Javascript'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './web-apis.png'
 ---
 
 > 웹 앱, 웹 사이트 만들 때 사용할 수 있는 모든 객체 유형  

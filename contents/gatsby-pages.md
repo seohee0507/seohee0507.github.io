@@ -3,7 +3,7 @@ date: '2025-09-22'
 title: 'Gatsby 페이지 구현하기'
 categories: ['Modern Stack']
 summary: 'Page Paint, createPage, Meta Tag, Canonical, Sitemap'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './gatsby-pages.png'
 ---
 
 ## query-string

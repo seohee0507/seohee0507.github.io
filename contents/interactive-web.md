@@ -3,7 +3,7 @@ date: '2025-11-25'
 title: 'Interactive Web'
 categories: ['Visual UI']
 summary: 'R3F, Framer Motion'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './interactive-web.png'
 ---
 
 ## [React Three Fiber(R3F)](https://r3f.docs.pmnd.rs/getting-started/introduction)

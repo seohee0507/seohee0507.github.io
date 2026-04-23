@@ -3,7 +3,7 @@ date: '2026-03-18'
 title: 'css features'
 categories: ['Web Fundamentals']
 summary: '새로운 css, css trick'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './css-features.png'
 ---
 
 ## css feature

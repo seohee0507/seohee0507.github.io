@@ -28,10 +28,11 @@ const MarkdownRenderer = styled.div`
     }
   }
   h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     font-size: 1.25rem;
     font-weight: 600;
     ${breakpoints.mobile} {
+      margin-bottom: 0.5rem;
       font-size: 1rem;
     }
   }
@@ -51,7 +52,7 @@ const MarkdownRenderer = styled.div`
   }
 
   blockquote {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     padding: 0.875rem 1.5rem;
     background-color: #f6f7fb;
     border-radius: 0.25rem;
@@ -87,11 +88,12 @@ const MarkdownRenderer = styled.div`
       }
     }
     & + h3 {
-      margin-top: 2rem;
+      margin-top: 3rem;
       ${breakpoints.mobile} {
-        margin-top: 1.5rem;
+        margin-top: 1.75rem;
       }
     }
+
     & + h4 {
       margin-top: 1.5rem;
     }
@@ -112,15 +114,19 @@ const MarkdownRenderer = styled.div`
     list-style: none;
   }
 
+  h3 + .table-wrapper {
+    margin-top: 0;
+  }
+
   .table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    margin: 1.5rem 0;
     table {
       min-width: 600px;
     }
   }
   table {
-    margin-top: 1.5rem;
     border-collapse: collapse;
     border: 1px solid #ebeef7;
   }

@@ -3,7 +3,7 @@ date: '2025-09-26'
 title: 'Lottie'
 categories: ['Visual UI']
 summary: 'Lottie dotLottie 비교'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './lottie.png'
 ---
 
 > 에어비엔비에서 개발한 JSON 기반 애니메이션 오픈 소스 라이브러리  

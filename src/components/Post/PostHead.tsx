@@ -14,12 +14,11 @@ type PostHeadProps = {
 
 const PostHeadWrapper = styled.div``
 const PostImage = styled(GatsbyImage)`
+  width: 100%;
+  aspect-ratio: 16/9;
   margin-top: 2rem;
-  height: 432px;
 `
 const PostHeadInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   max-width: 768px;
   margin-inline: auto;
   padding: 3rem 1.25rem 0;
@@ -29,6 +28,8 @@ const Title = styled.h1`
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.25;
+  text-wrap: balance;
+  word-break: keep-all;
   ${breakpoints.mobile} {
     font-size: 2rem;
   }

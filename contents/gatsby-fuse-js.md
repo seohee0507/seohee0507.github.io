@@ -3,7 +3,7 @@ date: '2025-09-29'
 title: 'Gatsby 검색기능'
 categories: ['Modern Stack']
 summary: 'Gatsby에 Fuse.js 플러그인 추가'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './gatsby-fuse-js.png'
 ---
 
 ## [Fuse.js](https://www.fusejs.io/)

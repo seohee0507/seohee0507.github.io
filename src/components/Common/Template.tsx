@@ -33,11 +33,16 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
 
-        <link rel="icon" href="favicon.ico" />
-        <link rel="icon" href="favicon.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/gatsby-archive/favicon.ico" />
+        <link
+          rel="icon"
+          href="/gatsby-archive/favicon.png"
+          type="image/png"
+          sizes="32x32"
+        />
         <link
           rel="apple-touch-icon"
-          href="apple-touch-icon.png"
+          href="//gatsby-archive/apple-touch-icon.png"
           sizes="180x180"
         />
 

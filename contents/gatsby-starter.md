@@ -1,9 +1,9 @@
 ---
 date: '2025-09-17'
-title: 'Gatsby 환경 구성'
+title: 'Gatsby 프로젝트 생성'
 categories: ['Modern Stack']
-summary: 'Markdown GraphQL TypeScript EmotionJS'
-thumbnail: './gatsby-starter.jpg'
+summary: 'Gatsby 환경 구성 Markdown, GraphQL, TypeScript, EmotionJS'
+thumbnail: './gatsby-starter.png'
 ---
 
 ## 특징

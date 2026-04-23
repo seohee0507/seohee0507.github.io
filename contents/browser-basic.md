@@ -1,9 +1,9 @@
 ---
 date: '2025-09-26'
-title: 'Browser 기본'
+title: '브라우저 구조'
 categories: ['Web Fundamentals']
-summary: 'Browser Engine, DOM, Browser Rendering, Web Server'
-thumbnail: './gatsby-starter.jpg'
+summary: 'Browser engine부터 DOM 까지 Browser 동작 원리'
+thumbnail: './browser-basic.png'
 ---
 
 ## Browser

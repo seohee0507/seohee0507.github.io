@@ -18,8 +18,8 @@ const PostItemWrapper = styled(Link)`
 `
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
-  height: 120px;
   border-radius: 0.5rem;
+  aspect-ratio: 16/9;
   //object-fit: cover; gatsby-plugin-image 속성
 `
 const PostItemContent = styled.div`
@@ -51,6 +51,8 @@ const Title = styled.h3`
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.5;
+  text-wrap: balance;
+  word-break: keep-all;
 `
 const Summary = styled.div`
   display: -webkit-box;

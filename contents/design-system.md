@@ -3,7 +3,7 @@ date: '2026-04-20'
 title: 'Design System'
 categories: ['Design']
 summary: 'Design.md 작성법과 UX Writing 정리'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './design-system.png'
 ---
 
 ## Design System

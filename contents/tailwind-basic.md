@@ -3,7 +3,7 @@ date: '2026-02-20'
 title: 'Tailwind '
 categories: ['Modern Stack']
 summary: 'Tailwind v3 v4 비교'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './tailwind-basic.png'
 ---
 
 &nbsp; | v3 | v4
