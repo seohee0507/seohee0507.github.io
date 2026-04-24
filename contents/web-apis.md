@@ -1,5 +1,5 @@
 ---
-date: '2025-09-26'
+date: '2025-11-26'
 title: 'Web APIs'
 categories: ['Web Fundamentals']
 summary: 'DOM 요소, Javascript'
@@ -141,6 +141,9 @@ const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows CE/i.test(navigato
 - UA 객체
 - 최신 브라우저에서만 사용
 
+## ToggleEvent: newState
+> 요소가 전환되는 상태 String
+
 ## window.localStorage
 > [EventTarget] &leftarrow; [Window]
 Methods | &nbsp; 
@@ -149,6 +152,39 @@ Methods | &nbsp;
 `localStorage.getItem(keyName)` | 키 값(string) 반환, 없으면 null
 `localStorage.removeItem(keyName)` | 키 값 제거
 
+## window.requestAnimationFrame() method
+> 브라우저가 다음 화면을 그리기 직전 콜백 실행 (브라우저 주사율 기준 보통 60Hz)
+
+### setInterval 과 비교
+&nbsp; | `requestAnimationFrame` | `setInterval` 
+:------|:------------------------|:--------------------
+실행 타이밍 | 다음 프레임 직전 | 지정한 ms 무조건 실행
+백그라운드 | 자동 일시정지 (효율적) | 계속 실행 (낭비)
+프레임 동기화 | 정확히 맞춤 (부드러움) | 어긋날 수 있음
+중지 | `cancelAnimationFrame(id)` | `clearInterval(id)`
+
+```js
+const reqAni = () => {
+	const currentLeft = parseFloat(~.style.left) || 0
+	~.style.left = currentLeft + 10 + 'px'
+
+	if (currentLeft < 300) {
+		requestAnimationFrame(reqAni)
+		// return 시에도 멈춤
+	}
+}
+reqAni()
+```
+```js
+const setInt = setInterval(()=>{
+	const currentLeft = parseFloat(~.style.left) || 0;
+	~.style.left = currentLeft + 10 + 'px';
+
+	if(currentLeft > 300){
+		clearInterval(setInt);
+	}
+}, 16) // 16ms씩 무조건 실행
+```
 
 ## 사이즈와 스크롤
 ### Window Size

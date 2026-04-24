@@ -1,9 +1,9 @@
 ---
-date: '2025-11-19'
-title: 'HTML rel'
+date: '2025-10-19'
+title: 'HTML Link type, http-equiv'
 categories: ['Web Fundamentals']
 summary: 'HTML Attribute relkeywords'
-thumbnail: './gatsby-starter.jpg'
+thumbnail: './html-link-type.png'
 ---
 
 ## rel="noopener noreferrer"

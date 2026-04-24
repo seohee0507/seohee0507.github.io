@@ -134,6 +134,7 @@ module.exports = {
         stripQueryString: true,
       },
     },
+    `gatsby-plugin-react-helmet`,
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-robots-txt',

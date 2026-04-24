@@ -1,19 +1,126 @@
 ---
-date: '2026-03-18'
+date: '2026-04-18'
 title: 'css features'
 categories: ['Web Fundamentals']
 summary: '새로운 css, css trick'
 thumbnail: './css-features.png'
 ---
 
-## css feature
 
-### ellipsis
+## 텍스트 줄바꿈
 ```css
-.ellipsis{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:16px;line-height:24px;}
+text-wrap: balance;
 ```
 
-### 브라우저 터치스크린 액션
+Values | &nbsp; | 성능 비용 | 활용
+:-------|:-----------------------------|:---|:---
+balance | 각 줄의 길이 최대한 비슷하게 맞춤 | 높음 (4줄 이하 권장) | 제목, 헤더
+pretty  | 마지막 줄에 단어 하나만 남는 것 방지 | 비교적 낮음 | 본문, 단락
+
+## Popover API
+> JS 없이 css만으로 툴팁, 드롭다운, 모달 구현
+- Top Layer 자동 처리 (z-index)
+- 접근성 자동 처리 (모달 접근성은 `<dialog>` 가 더 적합)
+
+```html
+<button popovertarget="my-popover">열기</button>
+<div id="my-popover" popover>내용</div>
+```
+- `popovertarget` : `<buttom>`, `<input>` 요소로 popover 제어 (제어할 popover id값 받음)  
+	이 외 태그로(div, a) 사용하려면 js로 제어하며, 접근성 등 직접 처리해야함
+- `popovertargetaction` : popover 제어 요소에 작업 지정 (`show` `hide` `toggle`)
+
+popover Values | &nbsp; | &nbsp; 
+:-------|:------|:------
+auto (default) <br/> `popover="auto"` <br /> === `popover` <br /> === `popover=""` | 외부 클릭 닫기, ESC 닫기 가능(light-dismissed) | 툴팁, 드롭다운, 유저 프로필
+manual | JS로만 닫기 제어 | toast 알림
+hint <span class="badge-danger">실험적</span> | hint open 시 auto 닫지 않음 <br /> 실험단계로 기능 구현 잘 안됨 | &nbsp; 
+
+popover CSS features | &nbsp;
+:-------|:------
+::backdrop | 바로 뒤 전체 화면
+:popover-open | popover open 될 때 스타일
+
+popover Methods | &nbsp;
+:-------|:------
+`HTMLElement.hidePopover` | 숨긴 후 display:none
+`HTMLElement.showPopover` | 최상위 레이어에 추가
+`HTMLElement.togglePopover` | 현재 상태 반전 `HTMLElement.togglePopover(boolean)`
+
+
+### Toast Popover
+```html
+<button onclick="createToast('name', '저장', '완료되었습니다.')">Trigger</button>
+<div id="toast-container"></div>
+```
+
+```css
+[popover] {
+	position: absolute;
+	inset: unset;
+	right: 20px;
+	padding: 12px 20px;
+	border: 1px solid #ddd;
+
+	/* 퇴장 Style */
+	transform: translateY(20px); 
+	opacity: 0;
+	/* @starting-style - overlay, display 조합 */
+	transition:
+		opacity 0.3s,
+		transform 0.3s,
+		bottom 0.3s,
+		overlay 0.3s allow-discrete,
+		display 0.3s allow-discrete;
+}
+/* popover Open Style */
+[popover]:popover-open {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+/* 진입 Style */
+@starting-style {
+	[popover]:popover-open {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+}
+```
+
+```javascript
+const createToast = (name, title, msg) => {
+	const popover = document.createElement('div')
+	popover.popover = 'manual'
+	popover.classList.add('toast')
+	popover.textContent = msg
+	document.body.appendChild(popover)
+
+	popover.showPopover()
+	moveToast()
+
+	setTimeout(() => {
+		popover.hidePopover()
+		setTimeout(() => {
+			popover.remove() // 퇴장 Style 후 삭제
+			moveToast()
+		}, 500)
+	}, 4000)
+}
+
+const moveToast = () => {
+	const toasts = document.querySelectorAll('.toast:popover-open')
+	const margin = 10
+	const initialBottom = 20
+
+	toasts.forEach((toast, i) => {
+		const toastHeight = parseInt(toast.offsetHeight) || 0
+		toast.style.bottom = `${initialBottom + i * (toastHeight + margin)}px`
+	})
+}
+```
+
+## 브라우저 터치스크린 액션
 ```css
 touch-action: pan-y pinch-zoom; 다중 지정 가능
 ```
@@ -24,7 +131,7 @@ none | 모든 터치 이벤트 무시
 pan-x <br> pan-y <br> pan-left <br> pan-right <br> pan-up <br> pan-down | 특정 축, 방향
 pinch-zoom | 손가락 사용한 확대, 축소
 
-### Mobile (iOS)
+## Mobile (iOS)
 Values | &nbsp;
 :---|:---
 `-webkit-text-size-adjust: 100%` | 텍스트 자동 확대 방지
@@ -41,7 +148,7 @@ padding-bottom: calc(20px + env(safe-area-inset-bottom))
 - Values : `top` `right` `bottom` `left`
 - viewport 메타 태그 설정 `<... viewport-fit=cover>`
 
-### 변경될 속성 힌트
+## 변경될 속성 힌트 <span class="badge-danger">사용도 낮음</span>
 ```css
 will-change: left, top; 다중 지정 가능
 ```
@@ -53,7 +160,7 @@ scroll-position | &nbsp;
 contents | &nbsp;
 transform | css 속성 명시 가능
 
-### 텍스트 선택
+## 텍스트 선택
 ```css
 user-select: auto;
 ```
@@ -85,6 +192,11 @@ all | &nbsp; | <p class="text-select" style="user-select:all;">Lorem Ipsum is si
 .txt_underline{background:linear-gradient(color, color) no-repeat 0 100%; background-size:100% border-size}
 .btn_blur{padding:10px 20px;border-radius:100px;backdrop-filter:saturate(200%) blur(6px);-webkit-backdrop-filter:saturate(200%) blur(6px);background:transparent;border:0;box-shadow:inset 0 1px #fff3;}
 .drag-none img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;pointer-events:none;}
+```
+
+### ellipsis
+```css
+.ellipsis{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:16px;line-height:24px;}
 ```
 
 ### Login input

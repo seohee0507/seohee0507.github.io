@@ -170,7 +170,10 @@ const MarkdownRenderer = styled.div`
     border-radius: 0.25rem;
   }
   *:not(pre) > code[class*='language-'] {
-    padding: 0.2rem 0.375rem;
+    padding: 0.1875rem 0.375rem;
+    ${breakpoints.mobile} {
+      padding: 1px 0.3125rem 2px;
+    }
   }
 
   .gatsby-highlight {
@@ -219,6 +222,23 @@ const MarkdownRenderer = styled.div`
     font-size: 0.8125rem;
     border-top-left-radius: 0.3em;
     border-top-right-radius: 0.3em;
+  }
+
+  span[class^='badge-'] {
+    //display: inline-block;
+    padding: 0.125rem 0.3125rem;
+    font-size: 0.875rem;
+    border-radius: 0.1875rem;
+    vertical-align: middle;
+    font-size: 0.8125rem;
+  }
+  .badge-success {
+    color: #254f08;
+    background: #d2e9c1;
+  }
+  .badge-danger {
+    color: #b1380b;
+    background: #ffded2;
   }
 `
 

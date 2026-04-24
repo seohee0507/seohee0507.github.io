@@ -16,12 +16,12 @@ thumbnail: './design-system.png'
 4. Size : `sm` `md` `lg`
 
 - 상태와 타입 분리 <br />
-	<span style="display:inline-block;padding:2px 5px;font-size:13px;border-radius:3px;color:#B1380B;background:#ffded2;">Bad</span> `<Button button-status="loading" />` <br />
-	<span style="display:inline-block;padding:2px 5px;font-size:13px;border-radius:3px;color:#3D7317;background:#d2e9c1;">Good</span> `<Button variant="primary" state="isLoading" />`
+	<span class="badge-danger">Bad</span> `<Button button-status="loading" />` <br />
+	<span class="badge-success">Good</span> `<Button variant="primary" state="isLoading" />`
 
 - 수치 사용 지양 <br/>
-	<span style="display:inline-block;padding:2px 5px;font-size:13px;border-radius:3px;color:#B1380B;background:#ffded2;">Bad</span> `p-[20px]` <br />
-	<span style="display:inline-block;padding:2px 5px;font-size:13px;border-radius:3px;color:#3D7317;background:#d2e9c1;">Good</span> `size="lg"`
+	<span class="badge-danger">Bad</span> `p-[20px]` <br />
+	<span class="badge-success">Good</span> `size="lg"`
 
 ## Design.md
 

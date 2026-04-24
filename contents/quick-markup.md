@@ -1,5 +1,5 @@
 ---
-date: '2026-04-21'
+date: '2025-10-21'
 title: 'Quick Markup'
 categories: ['Web Fundamentals']
 summary: '이벤트 핸들링 최적화, OG Tag'

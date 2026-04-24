@@ -1,5 +1,5 @@
 ---
-date: '2026-03-22'
+date: '2025-10-20'
 title: 'Gatsby Markdown table에 가로스크롤 추가하기'
 categories: ['Modern Stack']
 summary: 'remark AST 이용하여 table wrapper 추가'
