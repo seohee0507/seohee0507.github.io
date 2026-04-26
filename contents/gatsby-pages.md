@@ -293,10 +293,10 @@ const Template: FunctionComponent<TemplateProps> = function({
 ```js:title=gatsby-config.js
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Test Site`,
-    description: `블로그 입니다.`,
-    author: `@Mee`,
-    siteUrl: `~/test-gatsby/`,
+    title: `사이트 이름`,
+    description: `사이트 설명`,
+    author: `이름`,
+    siteUrl: `~/`,
   },
 }
 ```

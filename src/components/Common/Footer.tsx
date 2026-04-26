@@ -17,7 +17,7 @@ const FooterText = styled.p`
 const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
-      <FooterText>2026 present</FooterText>
+      <FooterText>&copy; 2026 Choi Seohee. All Rights Reserved.</FooterText>
     </FooterWrapper>
   )
 }

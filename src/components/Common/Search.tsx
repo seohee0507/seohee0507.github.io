@@ -54,8 +54,7 @@ const SearchInputWrapper = styled.div<{ isSearching: boolean }>`
   width: 0;
   padding: 0;
   transition: width 0.3s;
-  ${({ isSearching }) =>
-    isSearching && 'padding:0.1875rem;width:15rem;margin-left:0.25rem;'};
+  ${({ isSearching }) => isSearching && 'padding:0.1875rem;width:15rem;margin-left:0.25rem;'};
 `
 
 const SearchInput = styled.input`
@@ -219,11 +218,7 @@ export function Search() {
             ref={inputRef}
           />
           {isReset && (
-            <SearchInputReset
-              type="reset"
-              title="지우기"
-              onClick={resetHandler}
-            >
+            <SearchInputReset type="reset" title="지우기" onClick={resetHandler}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

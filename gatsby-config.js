@@ -12,8 +12,8 @@ module.exports = {
   siteMetadata: {
     title: `SEOHEE Archive`,
     description: `SEOHEE Archive`,
-    author: `@Mee`,
-    siteUrl: `https://seohee0507.github.io/gatsby-archive/`,
+    author: `Choi Seohee`,
+    siteUrl: `https://seohee0507.github.io/gatsby-archive`,
   },
   plugins: [
     {
@@ -130,7 +130,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://seohee0507.github.io/gatsby-archive/`,
+        siteUrl: `https://seohee0507.github.io/gatsby-archive`,
         stripQueryString: true,
       },
     },

@@ -44,14 +44,14 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta property="og:image:width" content="768" />
         <meta property="og:image:height" content="432" />
         <meta property="og:url" content={url} />
-        <meta property="og:site_name" content={title} />
+        <meta property="og:site_name" content="SEOHEE Archive" />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={`https://seohee0507.github.io${image}`} />
         <meta name="twitter:site" content={url} />
-        <meta name="twitter:creator" content="SEOHEE" />
+        <meta name="twitter:creator" content="Choi Seohee" />
 
         <html lang="ko" />
       </Helmet>
