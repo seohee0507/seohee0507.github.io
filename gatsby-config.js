@@ -114,6 +114,7 @@ module.exports = {
               maxWidth: 768,
               quality: 100,
               withWebp: true,
+              wrapperStyle: `margin-left: 0;`,
             },
           },
           {

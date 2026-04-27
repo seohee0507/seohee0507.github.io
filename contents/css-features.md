@@ -17,108 +17,40 @@ Values | &nbsp; | 성능 비용 | 활용
 balance | 각 줄의 길이 최대한 비슷하게 맞춤 | 높음 (4줄 이하 권장) | 제목, 헤더
 pretty  | 마지막 줄에 단어 하나만 남는 것 방지 | 비교적 낮음 | 본문, 단락
 
-## Popover API
-> JS 없이 css만으로 툴팁, 드롭다운, 모달 구현
-- Top Layer 자동 처리 (z-index)
-- 접근성 자동 처리 (모달 접근성은 `<dialog>` 가 더 적합)
 
-```html
-<button popovertarget="my-popover">열기</button>
-<div id="my-popover" popover>내용</div>
-```
-- `popovertarget` : `<buttom>`, `<input>` 요소로 popover 제어 (제어할 popover id값 받음)  
-	이 외 태그로(div, a) 사용하려면 js로 제어하며, 접근성 등 직접 처리해야함
-- `popovertargetaction` : popover 제어 요소에 작업 지정 (`show` `hide` `toggle`)
-
-popover Values | &nbsp; | &nbsp; 
-:-------|:------|:------
-auto (default) <br/> `popover="auto"` <br /> === `popover` <br /> === `popover=""` | 외부 클릭 닫기, ESC 닫기 가능(light-dismissed) | 툴팁, 드롭다운, 유저 프로필
-manual | JS로만 닫기 제어 | toast 알림
-hint <span class="badge-danger">실험적</span> | hint open 시 auto 닫지 않음 <br /> 실험단계로 기능 구현 잘 안됨 | &nbsp; 
-
-popover CSS features | &nbsp;
-:-------|:------
-::backdrop | 바로 뒤 전체 화면
-:popover-open | popover open 될 때 스타일
-
-popover Methods | &nbsp;
-:-------|:------
-`HTMLElement.hidePopover` | 숨긴 후 display:none
-`HTMLElement.showPopover` | 최상위 레이어에 추가
-`HTMLElement.togglePopover` | 현재 상태 반전 `HTMLElement.togglePopover(boolean)`
-
-
-### Toast Popover
-```html
-<button onclick="createToast('name', '저장', '완료되었습니다.')">Trigger</button>
-<div id="toast-container"></div>
-```
-
+## @starting-style
+> 요소 애니메이션 진입 시 첫 프레임 스타일
+- `transition-behavior: ~s allow-discrete`  
+	: 애니메이션 끝날 때까지(~s) 속성 전환 미룸
 ```css
-[popover] {
-	position: absolute;
-	inset: unset;
-	right: 20px;
-	padding: 12px 20px;
-	border: 1px solid #ddd;
-
-	/* 퇴장 Style */
-	transform: translateY(20px); 
-	opacity: 0;
-	/* @starting-style - overlay, display 조합 */
+div{
+	display:none;
+	opacity:0;
 	transition:
 		opacity 0.3s,
-		transform 0.3s,
-		bottom 0.3s,
-		overlay 0.3s allow-discrete,
+		/* 애니메이션 끝날 때까지 display 속성 전환(display: none) 미룸  */
 		display 0.3s allow-discrete;
 }
-/* popover Open Style */
-[popover]:popover-open {
-	transform: translateY(0);
-	opacity: 1;
-}
-
-/* 진입 Style */
-@starting-style {
-	[popover]:popover-open {
-		transform: translateY(20px);
-		opacity: 0;
+@starting-style{
+	div.active{
+		opacity:0; /* .active 상태의 애니메이션 첫 프레임 스타일 */
 	}
 }
-```
-
-```javascript
-const createToast = (name, title, msg) => {
-	const popover = document.createElement('div')
-	popover.popover = 'manual'
-	popover.classList.add('toast')
-	popover.textContent = msg
-	document.body.appendChild(popover)
-
-	popover.showPopover()
-	moveToast()
-
-	setTimeout(() => {
-		popover.hidePopover()
-		setTimeout(() => {
-			popover.remove() // 퇴장 Style 후 삭제
-			moveToast()
-		}, 500)
-	}, 4000)
-}
-
-const moveToast = () => {
-	const toasts = document.querySelectorAll('.toast:popover-open')
-	const margin = 10
-	const initialBottom = 20
-
-	toasts.forEach((toast, i) => {
-		const toastHeight = parseInt(toast.offsetHeight) || 0
-		toast.style.bottom = `${initialBottom + i * (toastHeight + margin)}px`
-	})
+div.active{
+	display:block;
+	opacity:1;
 }
 ```
+### 사용예시
+- [dialog](/html-markup/#dialog-html-element)
+- [popover](/html-markup/#popover-html-attribute)
+
+## 텍스트 방향에 맞춘 min max size <span class="badge-danger">사용도 낮음</span>
+> 다국어 지원 시 사용
+&nbsp;            | 가로쓰기 (한국어/영어) | 세로 쓰기 (중국어/일본어)
+:-----------------|:-------------|:----------------
+`min-inline-size` | `min-width`  | `min-height`
+`min-block-size`  | `min-height` | `min-width`
 
 ## 브라우저 터치스크린 액션
 ```css
@@ -164,9 +96,10 @@ transform | css 속성 명시 가능
 ```css
 user-select: auto;
 ```
+- 가상 선택자(::before, ::after)는 선택 안됨
 Values | &nbsp; | 출력
 :---|:---|:---
-auto | default <br/> ::before, ::after 선택 제외 | <p class="text-select" style="user-select:auto;"> Lorem Ipsum is simply dummy</p>
+auto | default | <p class="text-select" style="user-select:auto;"> Lorem Ipsum is simply dummy</p>
 text | default 와 동일 | <p class="text-select" style="user-select:text;">Lorem Ipsum is simply dummy</p>
 none | &nbsp; | <p class="text-select" style="user-select:none;">Lorem Ipsum is simply dummy</p>
 all | &nbsp; | <p class="text-select" style="user-select:all;">Lorem Ipsum is simply dummy</p>
@@ -178,21 +111,25 @@ all | &nbsp; | <p class="text-select" style="user-select:all;">Lorem Ipsum is si
 
 ## css trick
 
-<span class="txt_underline">inline 속성 border-bottom<br/> Text Text</span>
+<span class="txt_underline">inline의 border-bottom 스타일주기<br/> 줄바꿈, animation 가능</span>
+
+```css
+.txt_underline{background:linear-gradient(color, color) no-repeat 0 100%; background-size:100% border-size}
+```
+
 <div style="background-color:#31373f;padding:10px 20px;">
 	<button class="btn_blur">btn_blur 버튼</button>
 </div>
+
+```css
+.btn_blur{padding:10px 20px;border-radius:100px;backdrop-filter:saturate(200%) blur(6px);-webkit-backdrop-filter:saturate(200%) blur(6px);background:transparent;border:0;box-shadow:inset 0 1px #fff3;}
+.drag-none img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;pointer-events:none;}
+```
 <style>
 .txt_underline{background:linear-gradient(#ffd723, #ffd723) no-repeat 0 100%; background-size:100% 2px;}
 .btn_blur{padding:10px 20px;border-radius:100px;backdrop-filter:saturate(300%) blur(6px);-webkit-backdrop-filter:saturate(300%) blur(6px);background:transparent;border:0;box-shadow:inset 0 1px #fff3;color:#fff;}
 .drag-none img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;pointer-events:none;}
 </style>
-
-```css
-.txt_underline{background:linear-gradient(color, color) no-repeat 0 100%; background-size:100% border-size}
-.btn_blur{padding:10px 20px;border-radius:100px;backdrop-filter:saturate(200%) blur(6px);-webkit-backdrop-filter:saturate(200%) blur(6px);background:transparent;border:0;box-shadow:inset 0 1px #fff3;}
-.drag-none img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;pointer-events:none;}
-```
 
 ### ellipsis
 ```css
