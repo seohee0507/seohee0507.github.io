@@ -79,150 +79,61 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tr>
 </tbody>
 </table></div>
-<h2 id="popover-api" style="position:relative;"><a href="#popover-api" aria-label="popover api permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Popover API</h2>
+<h2 id="starting-style" style="position:relative;"><a href="#starting-style" aria-label="starting style permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@starting-style</h2>
 <blockquote>
-<p>JS 없이 css만으로 툴팁, 드롭다운, 모달 구현</p>
+<p>요소 애니메이션 진입 시 첫 프레임 스타일</p>
 </blockquote>
 <ul>
-<li>Top Layer 자동 처리 (z-index)</li>
-<li>접근성 자동 처리 (모달 접근성은 <code class="language-text">&lt;dialog></code> 가 더 적합)</li>
+<li><code class="language-text">transition-behavior: ~s allow-discrete</code><br>
+: 애니메이션 끝날 때까지(~s) 속성 전환 미룸</li>
 </ul>
-<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">popovertarget</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>my-popover<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>열기<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>my-popover<span class="token punctuation">"</span></span> <span class="token attr-name">popover</span><span class="token punctuation">></span></span>내용<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div>
-<ul>
-<li><code class="language-text">popovertarget</code> : <code class="language-text">&lt;buttom></code>, <code class="language-text">&lt;input></code> 요소로 popover 제어 (제어할 popover id값 받음)<br>
-이 외 태그로(div, a) 사용하려면 js로 제어하며, 접근성 등 직접 처리해야함</li>
-<li><code class="language-text">popovertargetaction</code> : popover 제어 요소에 작업 지정 (<code class="language-text">show</code> <code class="language-text">hide</code> <code class="language-text">toggle</code>)</li>
-</ul>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th align="left">popover Values</th>
-<th align="left"> </th>
-<th align="left"> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">auto (default) <br/> <code class="language-text">popover="auto"</code> <br /> === <code class="language-text">popover</code> <br /> === <code class="language-text">popover=""</code></td>
-<td align="left">외부 클릭 닫기, ESC 닫기 가능(light-dismissed)</td>
-<td align="left">툴팁, 드롭다운, 유저 프로필</td>
-</tr>
-<tr>
-<td align="left">manual</td>
-<td align="left">JS로만 닫기 제어</td>
-<td align="left">toast 알림</td>
-</tr>
-<tr>
-<td align="left">hint <span class="badge-danger">실험적</span></td>
-<td align="left">hint open 시 auto 닫지 않음 <br /> 실험단계로 기능 구현 잘 안됨</td>
-<td align="left"> </td>
-</tr>
-</tbody>
-</table></div>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th align="left">popover CSS features</th>
-<th align="left"> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">::backdrop</td>
-<td align="left">바로 뒤 전체 화면</td>
-</tr>
-<tr>
-<td align="left">:popover-open</td>
-<td align="left">popover open 될 때 스타일</td>
-</tr>
-</tbody>
-</table></div>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th align="left">popover Methods</th>
-<th align="left"> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code class="language-text">HTMLElement.hidePopover</code></td>
-<td align="left">숨긴 후 display:none</td>
-</tr>
-<tr>
-<td align="left"><code class="language-text">HTMLElement.showPopover</code></td>
-<td align="left">최상위 레이어에 추가</td>
-</tr>
-<tr>
-<td align="left"><code class="language-text">HTMLElement.togglePopover</code></td>
-<td align="left">현재 상태 반전 <code class="language-text">HTMLElement.togglePopover(boolean)</code></td>
-</tr>
-</tbody>
-</table></div>
-<h3>Toast Popover</h3>
-<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">createToast</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'저장'</span><span class="token punctuation">,</span> <span class="token string">'완료되었습니다.'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Trigger<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>toast-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div>
-<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">[popover]</span> <span class="token punctuation">{</span>
-	<span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
-	<span class="token property">inset</span><span class="token punctuation">:</span> unset<span class="token punctuation">;</span>
-	<span class="token property">right</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
-	<span class="token property">padding</span><span class="token punctuation">:</span> 12px 20px<span class="token punctuation">;</span>
-	<span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ddd<span class="token punctuation">;</span>
-
-	<span class="token comment">/* 퇴장 Style */</span>
-	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>20px<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-	<span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-	<span class="token comment">/* @starting-style - overlay, display 조합 */</span>
+<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">{</span>
+	<span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span>
+	<span class="token property">opacity</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
 	<span class="token property">transition</span><span class="token punctuation">:</span>
 		opacity 0.3s<span class="token punctuation">,</span>
-		transform 0.3s<span class="token punctuation">,</span>
-		bottom 0.3s<span class="token punctuation">,</span>
-		overlay 0.3s allow-discrete<span class="token punctuation">,</span>
+		<span class="token comment">/* 애니메이션 끝날 때까지 display 속성 전환(display: none) 미룸  */</span>
 		display 0.3s allow-discrete<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token comment">/* popover Open Style */</span>
-<span class="token selector">[popover]:popover-open</span> <span class="token punctuation">{</span>
-	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>0<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">/* 진입 Style */</span>
-<span class="token atrule"><span class="token rule">@starting-style</span></span> <span class="token punctuation">{</span>
-	<span class="token selector">[popover]:popover-open</span> <span class="token punctuation">{</span>
-		<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>20px<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token atrule"><span class="token rule">@starting-style</span></span><span class="token punctuation">{</span>
+	<span class="token selector">div.active</span><span class="token punctuation">{</span>
+		<span class="token property">opacity</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span> <span class="token comment">/* .active 상태의 애니메이션 첫 프레임 스타일 */</span>
 	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre></div>
-<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">createToast</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> title<span class="token punctuation">,</span> msg</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-	<span class="token keyword">const</span> popover <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span>
-	popover<span class="token punctuation">.</span>popover <span class="token operator">=</span> <span class="token string">'manual'</span>
-	popover<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'toast'</span><span class="token punctuation">)</span>
-	popover<span class="token punctuation">.</span>textContent <span class="token operator">=</span> msg
-	document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>popover<span class="token punctuation">)</span>
-
-	popover<span class="token punctuation">.</span><span class="token function">showPopover</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token function">moveToast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-	<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-		popover<span class="token punctuation">.</span><span class="token function">hidePopover</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-			popover<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 퇴장 Style 후 삭제</span>
-			<span class="token function">moveToast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4000</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> <span class="token function-variable function">moveToast</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-	<span class="token keyword">const</span> toasts <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'.toast:popover-open'</span><span class="token punctuation">)</span>
-	<span class="token keyword">const</span> margin <span class="token operator">=</span> <span class="token number">10</span>
-	<span class="token keyword">const</span> initialBottom <span class="token operator">=</span> <span class="token number">20</span>
-
-	toasts<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">toast<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-		<span class="token keyword">const</span> toastHeight <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>toast<span class="token punctuation">.</span>offsetHeight<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token number">0</span>
-		toast<span class="token punctuation">.</span>style<span class="token punctuation">.</span>bottom <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>initialBottom <span class="token operator">+</span> i <span class="token operator">*</span> <span class="token punctuation">(</span>toastHeight <span class="token operator">+</span> margin<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span>
-	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token selector">div.active</span><span class="token punctuation">{</span>
+	<span class="token property">display</span><span class="token punctuation">:</span>block<span class="token punctuation">;</span>
+	<span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
+<h3>사용예시</h3>
+<ul>
+<li><a href="/gatsby-archive/html-markup/#dialog-html-element">dialog</a></li>
+<li><a href="/gatsby-archive/html-markup/#popover-html-attribute">popover</a></li>
+</ul>
+<h2 id="텍스트-방향에-맞춘-min-max-size-span-classbadge-danger사용도-낮음span" style="position:relative;"><a href="#%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B0%A9%ED%96%A5%EC%97%90-%EB%A7%9E%EC%B6%98-min-max-size-span-classbadge-danger%EC%82%AC%EC%9A%A9%EB%8F%84-%EB%82%AE%EC%9D%8Cspan" aria-label="텍스트 방향에 맞춘 min max size span classbadge danger사용도 낮음span permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>텍스트 방향에 맞춘 min max size <span class="badge-danger">사용도 낮음</span></h2>
+<blockquote>
+<p>다국어 지원 시 사용</p>
+</blockquote>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left"> </th>
+<th align="left">가로쓰기 (한국어/영어)</th>
+<th align="left">세로 쓰기 (중국어/일본어)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="language-text">min-inline-size</code></td>
+<td align="left"><code class="language-text">min-width</code></td>
+<td align="left"><code class="language-text">min-height</code></td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">min-block-size</code></td>
+<td align="left"><code class="language-text">min-height</code></td>
+<td align="left"><code class="language-text">min-width</code></td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="브라우저-터치스크린-액션" style="position:relative;"><a href="#%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%ED%84%B0%EC%B9%98%EC%8A%A4%ED%81%AC%EB%A6%B0-%EC%95%A1%EC%85%98" aria-label="브라우저 터치스크린 액션 permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>브라우저 터치스크린 액션</h2>
 <div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token property">touch-action</span><span class="token punctuation">:</span> pan-y pinch-zoom<span class="token punctuation">;</span> 다중 지정 가능</code></pre></div>
 <div class="table-wrapper"><table>
@@ -319,6 +230,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </table></div>
 <h2 id="텍스트-선택" style="position:relative;"><a href="#%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%84%A0%ED%83%9D" aria-label="텍스트 선택 permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>텍스트 선택</h2>
 <div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token property">user-select</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span></code></pre></div>
+<ul>
+<li>가상 선택자(::before, ::after)는 선택 안됨</li>
+</ul>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -330,7 +244,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tbody>
 <tr>
 <td align="left">auto</td>
-<td align="left">default <br/> ::before, ::after 선택 제외</td>
+<td align="left">default</td>
 <td align="left"><p class="text-select" style="user-select:auto;"> Lorem Ipsum is simply dummy</p></td>
 </tr>
 <tr>
@@ -354,18 +268,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .text-select::before{content:'가상 선택자';margin-right:8px;}
 </style>
 <h2 id="css-trick" style="position:relative;"><a href="#css-trick" aria-label="css trick permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>css trick</h2>
-<p><span class="txt_underline">inline 속성 border-bottom<br/> Text Text</span></p>
+<p><span class="txt_underline">inline의 border-bottom 스타일주기<br/> 줄바꿈, animation 가능</span></p>
+<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">.txt_underline</span><span class="token punctuation">{</span><span class="token property">background</span><span class="token punctuation">:</span><span class="token function">linear-gradient</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> color<span class="token punctuation">)</span> no-repeat 0 100%<span class="token punctuation">;</span> <span class="token property">background-size</span><span class="token punctuation">:</span>100% border-size<span class="token punctuation">}</span></code></pre></div>
 <div style="background-color:#31373f;padding:10px 20px;">
 	<button class="btn_blur">btn_blur 버튼</button>
 </div>
+<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">.btn_blur</span><span class="token punctuation">{</span><span class="token property">padding</span><span class="token punctuation">:</span>10px 20px<span class="token punctuation">;</span><span class="token property">border-radius</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token property">backdrop-filter</span><span class="token punctuation">:</span><span class="token function">saturate</span><span class="token punctuation">(</span>200%<span class="token punctuation">)</span> <span class="token function">blur</span><span class="token punctuation">(</span>6px<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token property">-webkit-backdrop-filter</span><span class="token punctuation">:</span><span class="token function">saturate</span><span class="token punctuation">(</span>200%<span class="token punctuation">)</span> <span class="token function">blur</span><span class="token punctuation">(</span>6px<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token property">background</span><span class="token punctuation">:</span>transparent<span class="token punctuation">;</span><span class="token property">border</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span><span class="token property">box-shadow</span><span class="token punctuation">:</span>inset 0 1px #fff3<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token selector">.drag-none img</span><span class="token punctuation">{</span><span class="token property">-webkit-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">-khtml-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">-moz-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">-o-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">pointer-events</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre></div>
 <style>
 .txt_underline{background:linear-gradient(#ffd723, #ffd723) no-repeat 0 100%; background-size:100% 2px;}
 .btn_blur{padding:10px 20px;border-radius:100px;backdrop-filter:saturate(300%) blur(6px);-webkit-backdrop-filter:saturate(300%) blur(6px);background:transparent;border:0;box-shadow:inset 0 1px #fff3;color:#fff;}
 .drag-none img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;pointer-events:none;}
 </style>
-<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">.txt_underline</span><span class="token punctuation">{</span><span class="token property">background</span><span class="token punctuation">:</span><span class="token function">linear-gradient</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> color<span class="token punctuation">)</span> no-repeat 0 100%<span class="token punctuation">;</span> <span class="token property">background-size</span><span class="token punctuation">:</span>100% border-size<span class="token punctuation">}</span>
-<span class="token selector">.btn_blur</span><span class="token punctuation">{</span><span class="token property">padding</span><span class="token punctuation">:</span>10px 20px<span class="token punctuation">;</span><span class="token property">border-radius</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token property">backdrop-filter</span><span class="token punctuation">:</span><span class="token function">saturate</span><span class="token punctuation">(</span>200%<span class="token punctuation">)</span> <span class="token function">blur</span><span class="token punctuation">(</span>6px<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token property">-webkit-backdrop-filter</span><span class="token punctuation">:</span><span class="token function">saturate</span><span class="token punctuation">(</span>200%<span class="token punctuation">)</span> <span class="token function">blur</span><span class="token punctuation">(</span>6px<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token property">background</span><span class="token punctuation">:</span>transparent<span class="token punctuation">;</span><span class="token property">border</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span><span class="token property">box-shadow</span><span class="token punctuation">:</span>inset 0 1px #fff3<span class="token punctuation">;</span><span class="token punctuation">}</span>
-<span class="token selector">.drag-none img</span><span class="token punctuation">{</span><span class="token property">-webkit-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">-khtml-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">-moz-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">-o-user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">user-drag</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token property">pointer-events</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre></div>
 <h3>ellipsis</h3>
 <div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">.ellipsis</span><span class="token punctuation">{</span><span class="token property">overflow</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span><span class="token property">text-overflow</span><span class="token punctuation">:</span>ellipsis<span class="token punctuation">;</span><span class="token property">display</span><span class="token punctuation">:</span>-webkit-box<span class="token punctuation">;</span><span class="token property">-webkit-line-clamp</span><span class="token punctuation">:</span>2<span class="token punctuation">;</span><span class="token property">-webkit-box-orient</span><span class="token punctuation">:</span>vertical<span class="token punctuation">;</span><span class="token property">font-size</span><span class="token punctuation">:</span>16px<span class="token punctuation">;</span><span class="token property">line-height</span><span class="token punctuation">:</span>24px<span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre></div>
 <h3>Login input</h3>
@@ -389,6 +303,6 @@ input:autofill:active</span> <span class="token punctuation">{</span>
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-c740f3ec582f0e27e223.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-8a74a841a3266e3b5e38.js\"],\"component---src-pages-index-tsx\":[],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx-955b84999181d3f61f6b.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-e75691bc4e66551f867c.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-8a74a841a3266e3b5e38.js\"],\"component---src-pages-index-tsx\":[],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx-955b84999181d3f61f6b.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="8e48a374d2409057496a";</script><script src="/gatsby-archive/webpack-runtime-16017e0074101bbbb339.js" async></script><script src="/gatsby-archive/app-c740f3ec582f0e27e223.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="e32fc07fbd6eb53d2835";</script><script src="/gatsby-archive/webpack-runtime-16017e0074101bbbb339.js" async></script><script src="/gatsby-archive/app-e75691bc4e66551f867c.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
