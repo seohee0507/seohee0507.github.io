@@ -141,9 +141,6 @@ const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows CE/i.test(navigato
 - UA 객체
 - 최신 브라우저에서만 사용
 
-## ToggleEvent: newState
-> 요소가 전환되는 상태 String
-
 ## window.localStorage
 > [EventTarget] &leftarrow; [Window]
 Methods | &nbsp; 
@@ -281,12 +278,79 @@ function succeess(coords) {
 navigator.geolocation.getCurrentPosition(success, error, [options]);
 ```
 
+## getAnimations()
+> 요소에 현재 적용 중인 모든 애니메이션 Promise 객체 배열 반환
+
+```js
+element.getAnimations()
+```
+- `.playbackRate` : 재생 속도
+- `.finished` : 완료 시
+- `.cancel()` : 실행 중인 모든 애니메이션 종료
+
+```js
+element.getAnimations().map(ani => ani.playbackRate = 0.5)
+```
+
 ## JavaScript
 ### JSON
 Methods | &nbsp; 
 :---|:---
 `JSON.stringify()` | Object, array &rightarrow; JSON String
 `JSON.parse()` | JSON String &rightarrow; Object, array
+
+## Promise()
+> 비동기 작업의 최종 완료 또는 실패 나타내는 객체
+```js
+new Promise(executor)
+```
+### Promise State  
+Pending | Fulfilled | Rejected
+
+### 생성
+```js
+const myPromise = new Promise((resolve, reject) =>{
+	resolve(value)
+	//or
+	reject("에러")
+})
+```
+### 사용
+```js
+myPromise
+	.then(data => data)
+	.catch(error => console.error(error))
+	.finally(()=> 작업종료)
+```
+```js
+async function handlePromise(){
+	try{
+		const data = await myPromise;
+
+	}catch(error){
+		console.error(error)
+
+	}finally{
+		작업종료
+	}
+}
+```
+
+Promise Array        | 반환 시점                  | 결과
+:--------------------|:--------------------------|:--------------
+Promise.all()        | 하나라도 실패 시 바로 reject | resolve 배열 또는 reject(첫 번째 reject)
+Promise.allSettled() | 모든 Promise 처리된 후  | 상태 포함한 객체 배열
+
+```js
+//Promise 중 reject 있을 때
+//Promise.all(Promise array)
+PromiseState: "rejected"
+PromiseResult: 거부 사유
+
+//Promise.allSettled(Promise array)
+PromiseState: "fulfilled",
+PromiseResult: [{status: 'fulfilled', value: Array...}, {status: 'rejected', reason: 거부 사유}]
+```
 
 
 * * *
