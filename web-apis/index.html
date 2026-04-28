@@ -236,10 +236,6 @@ customElements<span class="token punctuation">.</span><span class="token functio
 <li>UA 객체</li>
 <li>최신 브라우저에서만 사용</li>
 </ul>
-<h2 id="toggleevent-newstate" style="position:relative;"><a href="#toggleevent-newstate" aria-label="toggleevent newstate permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ToggleEvent: newState</h2>
-<blockquote>
-<p>요소가 전환되는 상태 String</p>
-</blockquote>
 <h2 id="windowlocalstorage" style="position:relative;"><a href="#windowlocalstorage" aria-label="windowlocalstorage permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>window.localStorage</h2>
 <blockquote>
 <p>[EventTarget] ← [Window]</p>
@@ -493,6 +489,17 @@ ex) name: <code class="language-text">user.name</code> 일 경우 (패턴 <code 
 	coords<span class="token punctuation">.</span>longitude    <span class="token comment">//경도</span>
 <span class="token punctuation">}</span>
 navigator<span class="token punctuation">.</span>geolocation<span class="token punctuation">.</span><span class="token function">getCurrentPosition</span><span class="token punctuation">(</span>success<span class="token punctuation">,</span> error<span class="token punctuation">,</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<h2 id="getanimations" style="position:relative;"><a href="#getanimations" aria-label="getanimations permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getAnimations()</h2>
+<blockquote>
+<p>요소에 현재 적용 중인 모든 애니메이션 Promise 객체 배열 반환</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">element<span class="token punctuation">.</span><span class="token function">getAnimations</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
+<ul>
+<li><code class="language-text">.playbackRate</code> : 재생 속도</li>
+<li><code class="language-text">.finished</code> : 완료 시</li>
+<li><code class="language-text">.cancel()</code> : 실행 중인 모든 애니메이션 종료</li>
+</ul>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">element<span class="token punctuation">.</span><span class="token function">getAnimations</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">ani</span> <span class="token operator">=></span> ani<span class="token punctuation">.</span>playbackRate <span class="token operator">=</span> <span class="token number">0.5</span><span class="token punctuation">)</span></code></pre></div>
 <h2 id="javascript" style="position:relative;"><a href="#javascript" aria-label="javascript permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript</h2>
 <h3>JSON</h3>
 <div class="table-wrapper"><table>
@@ -513,6 +520,64 @@ navigator<span class="token punctuation">.</span>geolocation<span class="token p
 </tr>
 </tbody>
 </table></div>
+<h2 id="promise" style="position:relative;"><a href="#promise" aria-label="promise permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Promise()</h2>
+<blockquote>
+<p>비동기 작업의 최종 완료 또는 실패 나타내는 객체</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>executor<span class="token punctuation">)</span></code></pre></div>
+<h3>Promise State</h3>
+<p>Pending | Fulfilled | Rejected</p>
+<h3>생성</h3>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> myPromise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">{</span>
+	<span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+	<span class="token comment">//or</span>
+	<span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">"에러"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<h3>사용</h3>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">myPromise
+	<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">data</span> <span class="token operator">=></span> data<span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">finally</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span> 작업종료<span class="token punctuation">)</span></code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">handlePromise</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">try</span><span class="token punctuation">{</span>
+		<span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token keyword">await</span> myPromise<span class="token punctuation">;</span>
+
+	<span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">{</span>
+		console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+
+	<span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
+		작업종료
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left">Promise Array</th>
+<th align="left">반환 시점</th>
+<th align="left">결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Promise.all()</td>
+<td align="left">하나라도 실패 시 바로 reject</td>
+<td align="left">resolve 배열 또는 reject(첫 번째 reject)</td>
+</tr>
+<tr>
+<td align="left">Promise.allSettled()</td>
+<td align="left">모든 Promise 처리된 후</td>
+<td align="left">상태 포함한 객체 배열</td>
+</tr>
+</tbody>
+</table></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">//Promise 중 reject 있을 때</span>
+<span class="token comment">//Promise.all(Promise array)</span>
+<span class="token literal-property property">PromiseState</span><span class="token operator">:</span> <span class="token string">"rejected"</span>
+<span class="token literal-property property">PromiseResult</span><span class="token operator">:</span> 거부 사유
+
+<span class="token comment">//Promise.allSettled(Promise array)</span>
+<span class="token literal-property property">PromiseState</span><span class="token operator">:</span> <span class="token string">"fulfilled"</span><span class="token punctuation">,</span>
+<span class="token literal-property property">PromiseResult</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token literal-property property">status</span><span class="token operator">:</span> <span class="token string">'fulfilled'</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> Array<span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">status</span><span class="token operator">:</span> <span class="token string">'rejected'</span><span class="token punctuation">,</span> <span class="token literal-property property">reason</span><span class="token operator">:</span> 거부 사유<span class="token punctuation">}</span><span class="token punctuation">]</span></code></pre></div>
 <hr>
 <ul>
 <li><a href="https://developer.mozilla.org/ko/docs/Web/API/Web_components/Using_custom_elements" target="_blank" rel="nofollow">사용자 정의 요소</a></li>

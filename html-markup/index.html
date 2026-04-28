@@ -97,8 +97,12 @@ JavaScript 사용하여 제어</p>
 <td align="left">바로 뒤 전체 화면</td>
 </tr>
 <tr>
+<td align="left">~s allow-discrete <br />(<code class="language-text">transition-behavior</code>)</td>
+<td align="left">불연속 속성(display, visibility, overlay)을 애니메이션 대상에 추가 <br /> <code class="language-text">overlay</code> ~초 까지 레이어(z-index) 유지</td>
+</tr>
+<tr>
 <td align="left"><a href="/gatsby-archive/css-features/#starting-style">@starting-style</a></td>
-<td align="left">애니메이션 전환</td>
+<td align="left">애니메이션 시작 순간 초기 스타일</td>
 </tr>
 </tbody>
 </table></div>
@@ -114,7 +118,7 @@ JavaScript 사용하여 제어</p>
 		transform 0.3s<span class="token punctuation">,</span>
 		opacity 0.3s<span class="token punctuation">,</span>
 		display 0.3s allow-discrete<span class="token punctuation">,</span>
-		overlay 0.3s allow-discrete<span class="token punctuation">;</span>
+		overlay 0.3s allow-discrete<span class="token punctuation">;</span> <span class="token comment">/* 최상단 레이어 유지 */</span>
 <span class="token punctuation">}</span>
 <span class="token comment">/* Open State */</span>
 <span class="token selector">dialog[open]</span> <span class="token punctuation">{</span>
@@ -137,7 +141,7 @@ JavaScript 사용하여 제어</p>
 <ul>
 <li>Top Layer 자동 처리 (복잡한 z-index 해결)</li>
 <li>접근성 자동 처리</li>
-<li>모달 접근성은 <a href="#dialog"><code class="language-text">&lt;dialog></code></a> 가 더 적합(tab focus)</li>
+<li>모달 접근성은 <a href="#dialog-html-element"><code class="language-text">&lt;dialog></code></a> 가 더 적합(tab focus)</li>
 </ul>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">popovertarget</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>my-popover<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>열기<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>my-popover<span class="token punctuation">"</span></span> <span class="token attr-name">popover</span><span class="token punctuation">></span></span>내용<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div>
@@ -188,10 +192,6 @@ JavaScript 사용하여 제어</p>
 <td align="left">:popover-open</td>
 <td align="left">popover open 될 때 스타일</td>
 </tr>
-<tr>
-<td align="left"><a href="/gatsby-archive/css-features/#starting-style">@starting-style</a></td>
-<td align="left">애니메이션 전환</td>
-</tr>
 </tbody>
 </table></div>
 <div class="table-wrapper"><table>
@@ -217,37 +217,34 @@ JavaScript 사용하여 제어</p>
 </tbody>
 </table></div>
 <h3>Toast Popover</h3>
-<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">createToast</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'저장'</span><span class="token punctuation">,</span> <span class="token string">'완료되었습니다.'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Trigger<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>toast-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div>
-<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">[popover]</span> <span class="token punctuation">{</span>
-	<span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">createToast</span><span class="token punctuation">(</span><span class="token string">'완료되었습니다.'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Trigger<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre></div>
+<div class="gatsby-highlight" data-language="css"><pre class="language-css"><code class="language-css"><span class="token selector">.toast[popover]</span> <span class="token punctuation">{</span>
 	<span class="token property">inset</span><span class="token punctuation">:</span> unset<span class="token punctuation">;</span>
 	<span class="token property">right</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
-	<span class="token property">padding</span><span class="token punctuation">:</span> 12px 20px<span class="token punctuation">;</span>
-	<span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ddd<span class="token punctuation">;</span>
+	<span class="token property">bottom</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
 
 	<span class="token comment">/* Exit State */</span>
-	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>20px<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateX</span><span class="token punctuation">(</span>100%<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 	<span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 	<span class="token property">transition</span><span class="token punctuation">:</span>
-		opacity 0.3s<span class="token punctuation">,</span>
-		transform 0.3s<span class="token punctuation">,</span>
 		bottom 0.3s<span class="token punctuation">,</span>
+		transform 0.3s<span class="token punctuation">,</span>
+		opacity 0.3s<span class="token punctuation">,</span>
 		display 0.3s allow-discrete<span class="token punctuation">,</span>
 		overlay 0.3s allow-discrete<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token comment">/* Open State */</span>
-<span class="token selector">[popover]:popover-open</span> <span class="token punctuation">{</span>
-	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token selector">.toast[popover]:popover-open</span> <span class="token punctuation">{</span>
+	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translate</span><span class="token punctuation">(</span>0<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
 	
 	<span class="token comment">/* Before-Open State */</span>
 	<span class="token atrule"><span class="token rule">@starting-style</span></span> <span class="token punctuation">{</span>
-		<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>20px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
 		<span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">createToast</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> title<span class="token punctuation">,</span> msg</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">createToast</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
 	<span class="token keyword">const</span> popover <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span>
 	popover<span class="token punctuation">.</span>popover <span class="token operator">=</span> <span class="token string">'manual'</span>
 	popover<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'toast'</span><span class="token punctuation">)</span>
@@ -257,17 +254,16 @@ JavaScript 사용하여 제어</p>
 	popover<span class="token punctuation">.</span><span class="token function">showPopover</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token function">moveToast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-	<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+	<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
 		popover<span class="token punctuation">.</span><span class="token function">hidePopover</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-			popover<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Exit State 후(transition) 삭제</span>
-			<span class="token function">moveToast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4000</span><span class="token punctuation">)</span>
+
+		<span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">allSettled</span><span class="token punctuation">(</span>popover<span class="token punctuation">.</span><span class="token function">getAnimations</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">ani</span> <span class="token operator">=></span> ani<span class="token punctuation">.</span>finished<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    popover<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">const</span> <span class="token function-variable function">moveToast</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-	<span class="token keyword">const</span> toasts <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'.toast:popover-open'</span><span class="token punctuation">)</span>
+	<span class="token keyword">const</span> toasts <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'.toast:popover-open'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token keyword">const</span> margin <span class="token operator">=</span> <span class="token number">10</span>
 	<span class="token keyword">const</span> initialBottom <span class="token operator">=</span> <span class="token number">20</span>
 
@@ -276,6 +272,9 @@ JavaScript 사용하여 제어</p>
 		toast<span class="token punctuation">.</span>style<span class="token punctuation">.</span>bottom <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>initialBottom <span class="token operator">+</span> i <span class="token operator">*</span> <span class="token punctuation">(</span>toastHeight <span class="token operator">+</span> margin<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span>
 	<span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li><a href="/gatsby-archive/web-apis/#getanimations">getanimations()</a></li>
+</ul>
 <h3>ToggleEvent: newState</h3>
 <blockquote>
 <p><code class="language-text">&lt;popover></code> 요소가 전환되는 상태 String (<code class="language-text">&lt;details></code> 도 사용가능)</p>
