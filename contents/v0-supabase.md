@@ -90,12 +90,19 @@ export default function InventoryStock() {
 ```
 
 ### 4. UX 개선
-- 아이템 수정 시 각 아이템 별 수정보다 한번에 수정 후 저장
-- 드래그 앤 드롭 후 index 저장 (기존엔 화면에서만 순서 변경)
-![v0 ux 수정](../static/v0-ux.png)  
+#### 재고 테이블
+- 아이템 수정 시 각 아이템 별 수정 &rightarrow; 모든 아이템 한번에 수정 후 저장
+- 드래그 앤 드롭 후 index 저장
+![v0 ux 수정](../static/v0-ux.png)
 
-- 카테고리 아이콘 선택
-![v0 ux 수정](../static/v0-ux-icon.png)  
+#### 카테고리
+- Line 아이콘 &rightarrow; Solid 아이콘으로 변경
+  - 아이콘에 색상 옵션이 있어 빠르게 인지시키기 위해 솔리드 스타일로 변경
+  - 재고 테이블에서도 카테고리 아이콘 표현
+  - [SVGR](/svgr)
+- 카테고리 아이콘 변경 시 드롭 다운 형태
+
+![v0 ux 수정](../static/v0-ux-icon.png)
 
 ### * API 레이어 (Supabase Method Chaining 캡슐화)
 ```ts:title=lib/api/inventory.ts
@@ -154,3 +161,7 @@ export const inventoryApi = {
 ![vercel 배포하기](../static/v0-vercel.png)
 
 ### [재고 관리 프로토타입 바로가기](https://app-stock-lake.vercel.app/)
+
+* * *
+
+- [illed-in vs. Outline Icons](https://cdr.lib.unc.edu/concern/masters_papers/6w924g35w)
