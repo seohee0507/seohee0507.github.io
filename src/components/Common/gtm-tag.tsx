@@ -1,4 +1,4 @@
-const gtm: string = 'GTM-TQMNRJ2R'
+const gtm: string = 'GTM-MG5F3QQJ'
 
 // Google Tag Manager
 export const gtmScript = (

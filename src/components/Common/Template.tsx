@@ -40,7 +40,12 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={`https://seohee0507.github.io${image}`} />
+        <meta
+          property="og:image"
+          content={`https://seohee0507.github.io${
+            image === undefined ? '/gatsby-archive/og.png' : image
+          }`}
+        />
         <meta property="og:image:width" content="768" />
         <meta property="og:image:height" content="432" />
         <meta property="og:url" content={url} />
@@ -49,7 +54,12 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`https://seohee0507.github.io${image}`} />
+        <meta
+          name="twitter:image"
+          content={`https://seohee0507.github.io${
+            image === undefined ? '/gatsby-archive/og.png' : image
+          }`}
+        />
         <meta name="twitter:site" content={url} />
         <meta name="twitter:creator" content="Choi Seohee" />
 
