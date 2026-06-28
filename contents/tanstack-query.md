@@ -2,7 +2,7 @@
 date: '2026-06-13'
 title: 'Tanstack Query 사용 가이드'
 categories: ['Modern Stack']
-summary: 'Tanstack query Next 구성 방법'
+summary: 'Tanstack query Vite, Next.js 구성 방법'
 thumbnail: './tanstack-query.png'
 ---
 

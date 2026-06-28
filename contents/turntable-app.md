@@ -2,7 +2,7 @@
 date: '2026-06-20'
 title: 'Turntable 웹앱'
 categories: ['Visual UI']
-summary: '사이드 프로젝트로 플레이리스트 디자인하고 Framer Motion 사용하기'
+summary: '음악 플레이리스트 웹앱 디자인하고 Framer Motion 사용해보기'
 thumbnail: './turntable-app.png'
 ---
 
