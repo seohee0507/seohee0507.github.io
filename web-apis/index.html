@@ -500,6 +500,111 @@ navigator<span class="token punctuation">.</span>geolocation<span class="token p
 <li><code class="language-text">.cancel()</code> : 실행 중인 모든 애니메이션 종료</li>
 </ul>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">element<span class="token punctuation">.</span><span class="token function">getAnimations</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">ani</span> <span class="token operator">=></span> ani<span class="token punctuation">.</span>playbackRate <span class="token operator">=</span> <span class="token number">0.5</span><span class="token punctuation">)</span></code></pre></div>
+<h2 id="resizeobserver" style="position:relative;"><a href="#resizeobserver" aria-label="resizeobserver permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ResizeObserver</h2>
+<blockquote>
+<p>대상 요소 크기 변화 비동기적 관찰, 생성자(객체)</p>
+</blockquote>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left">Methods</th>
+<th align="left"> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="language-text">ResizeObserver.observe(targetElement)</code></td>
+<td align="left">관찰 대상 목록에 요소 추가</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">ResizeObserver.unobserve(target)</code></td>
+<td align="left">관찰 종료</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">ResizeObserver.disconnect()</code></td>
+<td align="left">모든 관찰 해제</td>
+</tr>
+</tbody>
+</table></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> resizeObserver <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ResizeObserver</span><span class="token punctuation">(</span><span class="token parameter">entries</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+	entries<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">entry</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+		<span class="token operator">...</span>entry<span class="token punctuation">.</span>contentRect<span class="token punctuation">.</span>width
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+resizeObserver<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span>Observe Element<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<h2 id="intersection-observer-api" style="position:relative;"><a href="#intersection-observer-api" aria-label="intersection observer api permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Intersection Observer API</h2>
+<blockquote>
+<p>상위 요소 또는 최상의 문서의 뷰포트와 대상 요소 사이의 변화 비동기적 관찰, 생성자(객체)</p>
+</blockquote>
+<ul>
+<li>이미지 Lazy loading</li>
+<li>무한 스크롤</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left">Methods</th>
+<th align="left"> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="language-text">IntersectionObserver.observe(targetElement)</code></td>
+<td align="left">주시 대상 목록에 요소 추가</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">IntersectionObserver.unobserve(target)</code></td>
+<td align="left">주시 중단</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">IntersectionObserver.disconnect()</code></td>
+<td align="left">모든 주시 대상 해제</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left">Options</th>
+<th align="left"> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="language-text">IntersectionObserver.root</code></td>
+<td align="left">바운딩 기준 요소(타겟의 상위 요소). null 이면 브라우저 뷰포트</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">IntersectionObserver.rootMargin</code></td>
+<td align="left">root 요소에 적용될 사이즈 조정 (px, %) <br /> ex) fixed 요소 있을 경우 조정</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">IntersectionObserver.thresholds</code></td>
+<td align="left">oberver의 콜백이 실행되어야하는 가시성 백분율 (0 ~ 1) 0.5 → 50% 보일 때 콜백</td>
+</tr>
+</tbody>
+</table></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> observers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// new IntersectionObserver 들 저장 관리, 해제(disconnect) 안할 시 메모리 누수</span>
+<span class="token keyword">const</span> <span class="token function-variable function">observeContent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+	<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">root</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">rootMargin</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">0px 0px 0px 0px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+		<span class="token literal-property property">threshold</span><span class="token operator">:</span> <span class="token number">0.5</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">const</span> observer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">IntersectionObserver</span><span class="token punctuation">(</span><span class="token parameter">entries</span> <span class="token operator">=></span><span class="token punctuation">{</span>
+		entries<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">entry</span> <span class="token operator">=></span><span class="token punctuation">{</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>isIntersecting<span class="token punctuation">)</span><span class="token punctuation">{</span>
+				<span class="token operator">...</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span>
+	observer<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span>Observe Element<span class="token punctuation">)</span>
+	observers<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> <span class="token function-variable function">disconnectObserveContent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+	observers<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">observer</span> <span class="token operator">=></span> observer<span class="token punctuation">.</span><span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	observers<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 기존 배열 (const observers) 유지하면서 내용만 삭제하고 싶을 때</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h2 id="javascript" style="position:relative;"><a href="#javascript" aria-label="javascript permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript</h2>
 <h3>JSON</h3>
 <div class="table-wrapper"><table>

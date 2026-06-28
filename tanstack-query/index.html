@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.16.1"/><meta data-react-helmet="true" name="description" content="Tanstack query Next 구성 방법"/><meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1.0"/><meta data-react-helmet="true" http-equiv="Content-Type" content="text/html;charset=UTF-8"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" property="og:title" content="Tanstack Query 사용 가이드"/><meta data-react-helmet="true" property="og:description" content="Tanstack query Next 구성 방법"/><meta data-react-helmet="true" property="og:image" content="https://seohee0507.github.io/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/tanstack-query.png"/><meta data-react-helmet="true" property="og:image:width" content="768"/><meta data-react-helmet="true" property="og:image:height" content="432"/><meta data-react-helmet="true" property="og:url"/><meta data-react-helmet="true" property="og:site_name" content="SEOHEE Archive"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Tanstack Query 사용 가이드"/><meta data-react-helmet="true" name="twitter:description" content="Tanstack query Next 구성 방법"/><meta data-react-helmet="true" name="twitter:image" content="https://seohee0507.github.io/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/tanstack-query.png"/><meta data-react-helmet="true" name="twitter:site"/><meta data-react-helmet="true" name="twitter:creator" content="Choi Seohee"/><style data-href="/gatsby-archive/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="preconnect" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard" crossorigin="true"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"/><style type="text/css">
+    .link-headers.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .link-headers.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .link-headers svg,
+    h2 .link-headers svg,
+    h3 .link-headers svg,
+    h4 .link-headers svg,
+    h5 .link-headers svg,
+    h6 .link-headers svg {
+      visibility: hidden;
+    }
+    h1:hover .link-headers svg,
+    h2:hover .link-headers svg,
+    h3:hover .link-headers svg,
+    h4:hover .link-headers svg,
+    h5:hover .link-headers svg,
+    h6:hover .link-headers svg,
+    h1 .link-headers:focus svg,
+    h2 .link-headers:focus svg,
+    h3 .link-headers:focus svg,
+    h4 .link-headers:focus svg,
+    h5 .link-headers:focus svg,
+    h6 .link-headers:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="canonical" href="https://seohee0507.github.io/gatsby-archive/tanstack-query/" data-baseprotocol="https:" data-basehost="seohee0507.github.io"/><title data-react-helmet="true">Tanstack Query 사용 가이드</title><link data-react-helmet="true" rel="icon" href="/gatsby-archive/favicon.ico"/><link data-react-helmet="true" rel="icon" href="/gatsby-archive/favicon.png" type="image/png" sizes="32x32"/><link data-react-helmet="true" rel="apple-touch-icon" href="//gatsby-archive/apple-touch-icon.png" sizes="180x180"/><link rel="sitemap" type="application/xml" href="/gatsby-archive/sitemap-index.xml"/><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MG5F3QQJ')</script></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MG5F3QQJ"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 1mismbe">.css-1mismbe{position:relative;min-height:100svh;}</style><main class="css-1mismbe e1s18rpo0"><style data-emotion="css-global 1fzz4l7">div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}body{margin:0;padding:0;font-family:Pretendard,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;color:#333;}html,body,#___gatsby,#gatsby-focus-wrapper{height:100%;}a{color:inherit;-webkit-text-decoration:none;text-decoration:none;}button{margin:0;padding:0;border:1px solid #ddd;box-shadow:none;background-color:transparent;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;font-family:inherit;font-size:100%;cursor:pointer;}input[type='text'],input[type='password']{margin:0;box-sizing:border-box;outline:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;font-family:inherit;}</style><style data-emotion="css cmox9q">.css-cmox9q{position:-webkit-sticky;position:sticky;top:0;left:0;right:0;width:100%;height:3.125rem;z-index:100;}.css-cmox9q:after{content:'';position:absolute;display:block;inset:0;height:200%;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);-webkit-mask-image:linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);mask-image:linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);background-color:rgb(255 255 255 / 50%);z-index:-1;pointer-events:none;}</style><header class="css-cmox9q e12ceyvc2"><style data-emotion="css 64qa3q">.css-64qa3q{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-inline:auto;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:768px;height:100%;padding:0 1.25rem;}</style><div class="css-64qa3q e12ceyvc1"><style data-emotion="css 14gam1o">.css-14gam1o{display:inline-block;font-weight:500;color:#636363;font-size:1rem;text-align:center;font-style:oblique;}</style><div class="css-14gam1o e12ceyvc0"><a href="/gatsby-archive/">SEOHEE Archive</a></div><style data-emotion="css ohd3pb">.css-ohd3pb{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-left:auto;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}</style><div class="css-ohd3pb etxt2cb10"><style data-emotion="css ersml3">.css-ersml3{width:2.25rem;height:2.25rem;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;border-radius:0.25rem;cursor:pointer;}.css-ersml3:hover{background:#f1f1f1;}</style><div class="css-ersml3 etxt2cb9"><style data-emotion="css 100tqx6">.css-100tqx6{display:inline-block;width:1.25rem;height:1.25rem;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none'%3E%3Cpath stroke='%23636363' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8.25 14.25a6 6 0 1 0 0-12 6 6 0 0 0 0 12M15.75 15.75l-3.262-3.262'/%3E%3C/svg%3E") 50% 50%;}</style><i class="css-100tqx6 etxt2cb8"></i></div><style data-emotion="css 16unk8l">.css-16unk8l{position:relative;display:block;}</style><form class="css-16unk8l etxt2cb6"><style data-emotion="css v5abfb">.css-v5abfb{overflow:hidden;width:0;padding:0;-webkit-transition:width 0.3s;transition:width 0.3s;}</style><div class="css-v5abfb etxt2cb5"><style data-emotion="css fnz4d2">.css-fnz4d2{width:100%;height:2.125rem;padding:0px 1.625rem 0 0.875rem;border:1px solid #dadada;background:#fff;border-radius:2.125rem;line-height:1;}.css-fnz4d2:focus,.css-fnz4d2:active{border-color:#9bb0e3;box-shadow:0 0 0 2px #9bb0e3;-webkit-transition:0.3s;transition:0.3s;}</style><input type="text" class="css-fnz4d2 etxt2cb4" value=""/></div></form></div></div></header><div class="css-0 e1217lpn6"><style data-emotion="css 5un807">.css-5un807{max-width:768px;margin-inline:auto;padding:3rem 1.25rem 0;}</style><div class="css-5un807 e1217lpn4"><style data-emotion="css 1akz5pn">.css-1akz5pn{font-size:2.5rem;font-weight:700;line-height:1.25;text-wrap:balance;word-break:keep-all;}@media (max-width: 768px){.css-1akz5pn{font-size:2rem;}}</style><h1 class="css-1akz5pn e1217lpn3">Tanstack Query 사용 가이드</h1><style data-emotion="css 11taovv">.css-11taovv{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:1.5rem;}</style><div class="css-11taovv e1217lpn2"><style data-emotion="css 7akhjk">.css-7akhjk{border:1px solid #dadada;padding:0.25rem 0.625rem;font-weight:700;border-radius:4px;font-size:0.875rem;border-radius:20px;}</style><a class="css-7akhjk e1217lpn1" href="/gatsby-archive/?category=modern-stack">Modern Stack</a><style data-emotion="css 9ao5k8">.css-9ao5k8{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-left:0.5rem;color:#636363;font-size:0.875rem;}.css-9ao5k8:before{content:'';display:inline-block;width:3px;height:3px;margin-right:0.5rem;border-radius:4px;background-color:#7e7e7e;}</style><div class="css-9ao5k8 e1217lpn0">2026.06.13</div></div><style data-emotion="css 119dl7b">.css-119dl7b{width:100%;aspect-ratio:16/9;margin-top:2rem;}</style><div data-gatsby-image-wrapper="" class="gatsby-image-wrapper gatsby-image-wrapper-constrained css-119dl7b e1217lpn5"><div style="max-width:800px;display:block"><img alt="" role="presentation" aria-hidden="true" src="data:image/svg+xml;charset=utf-8,%3Csvg%20height=&#x27;450&#x27;%20width=&#x27;800&#x27;%20xmlns=&#x27;http://www.w3.org/2000/svg&#x27;%20version=&#x27;1.1&#x27;%3E%3C/svg%3E" style="max-width:100%;display:block;position:static"/></div><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#f8f8f8;position:absolute;top:0;left:0;bottom:0;right:0"></div><picture><source type="image/webp" data-srcset="/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/b6124/tanstack-query.webp 200w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/dff21/tanstack-query.webp 400w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/b2a35/tanstack-query.webp 800w" sizes="(min-width: 800px) 800px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 800px) 800px, 100vw" decoding="async" loading="lazy" data-src="/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/47126/tanstack-query.png" data-srcset="/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/a1453/tanstack-query.png 200w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/aeb79/tanstack-query.png 400w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/47126/tanstack-query.png 800w" alt="Tanstack Query 사용 가이드"/></picture><noscript><picture><source type="image/webp" srcSet="/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/b6124/tanstack-query.webp 200w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/dff21/tanstack-query.webp 400w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/b2a35/tanstack-query.webp 800w" sizes="(min-width: 800px) 800px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 800px) 800px, 100vw" decoding="async" loading="lazy" src="/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/47126/tanstack-query.png" srcSet="/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/a1453/tanstack-query.png 200w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/aeb79/tanstack-query.png 400w,/gatsby-archive/static/a9073f46473f9ef1a0f060242e3e7e2b/47126/tanstack-query.png 800w" alt="Tanstack Query 사용 가이드"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}</script></div></div></div><style data-emotion="css t1cjpf">.css-t1cjpf{max-width:768px;margin:0 auto;padding:0 1.25rem 5.75rem;word-break:break-all;line-height:1.5;font-weight:400;}.css-t1cjpf h2{margin-bottom:1.625rem;padding-top:3.125rem;font-size:1.75rem;font-weight:600;}.css-t1cjpf h2 .link-headers.before{top:3.125rem;}@media (max-width: 768px){.css-t1cjpf h2{font-size:1.25rem;margin-bottom:1rem;}}.css-t1cjpf h3{margin-bottom:1rem;font-size:1.25rem;font-weight:600;}@media (max-width: 768px){.css-t1cjpf h3{margin-bottom:0.5rem;font-size:1rem;}}.css-t1cjpf h4{margin-bottom:0.25rem;}.css-t1cjpf p{padding:0.25rem 0;}@media (max-width: 768px){.css-t1cjpf p{font-size:0.875rem;}}.css-t1cjpf img{max-width:100%;}.css-t1cjpf blockquote{margin:1.5rem 0;padding:0.875rem 1.5rem;background-color:#f6f7fb;border-radius:0.25rem;}@media (max-width: 768px){.css-t1cjpf blockquote{padding:0.5rem 1rem;margin:1rem 0;}}.css-t1cjpf ol,.css-t1cjpf ul{margin:1.25rem 0;padding-left:1.5rem;}.css-t1cjpf li{margin:0.75rem 0;}.css-t1cjpf li >ul{margin:0;}@media (max-width: 768px){.css-t1cjpf li{font-size:0.875rem;}}.css-t1cjpf ul li::marker{color:#c4c9dd;}.css-t1cjpf *+h2{margin-top:3.75rem;}@media (max-width: 768px){.css-t1cjpf *+h2{margin-top:0;}}.css-t1cjpf *+h3{margin-top:3rem;}@media (max-width: 768px){.css-t1cjpf *+h3{margin-top:1.75rem;}}.css-t1cjpf *+h4{margin-top:1.5rem;}.css-t1cjpf *+ol,.css-t1cjpf *+ul{margin-top:1rem;}.css-t1cjpf hr+h2,.css-t1cjpf hr+h3,.css-t1cjpf hr+h4{margin-top:0;}.css-t1cjpf .contains-task-list{list-style:none;}.css-t1cjpf h3+.table-wrapper{margin-top:0;}.css-t1cjpf .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0;}.css-t1cjpf .table-wrapper table{min-width:600px;}.css-t1cjpf table{border-collapse:collapse;border:1px solid #ebeef7;}.css-t1cjpf table thead tr{border-bottom:2px solid #ebeef7;background-color:#ebeef7;}.css-t1cjpf table tr:not(:last-of-type){border-bottom:1px solid #ebeef7;}.css-t1cjpf table th{padding:0.625rem 1rem 0.375rem;}@media (max-width: 768px){.css-t1cjpf table th{font-size:0.875rem;}}.css-t1cjpf table td{padding:0.625rem 1rem;}@media (max-width: 768px){.css-t1cjpf table td{font-size:0.875rem;}}.css-t1cjpf hr{border:1px solid #ebeef7;margin:6.25rem 0;}.css-t1cjpf a{color:#5369ad;-webkit-text-decoration:underline;text-decoration:underline;}.css-t1cjpf a:hover{color:#2b3d74;}.css-t1cjpf code[class*='language-'],.css-t1cjpf pre[class*='language-']{tab-size:2;font-size:0.875rem;border-radius:0.25rem;}.css-t1cjpf *:not(pre)>code[class*='language-']{padding:0.1875rem 0.375rem;}@media (max-width: 768px){.css-t1cjpf *:not(pre)>code[class*='language-']{padding:1px 0.3125rem 2px;}}.css-t1cjpf .gatsby-highlight{position:relative;}.css-t1cjpf .gatsby-highlight:after{position:absolute;padding:0 4px;right:6px;top:6px;border-radius:2px;border:1px solid #ccc;color:#ccc;font-size:10px;}.css-t1cjpf .gatsby-highlight[data-language='markdown']:after{content:'Markdown';}.css-t1cjpf .gatsby-highlight[data-language='html']:after{content:'HTML';}.css-t1cjpf .gatsby-highlight[data-language='tsx']:after{content:'tsx';}.css-t1cjpf .gatsby-highlight[data-language='css']:after{content:'CSS';}.css-t1cjpf .gatsby-highlight[data-language='javascript']:after{content:'Javscript';}.css-t1cjpf .gatsby-highlight[data-language='js']:after{content:'JS';}.css-t1cjpf .gatsby-highlight[data-language='json']:after{content:'JSON';}.css-t1cjpf .gatsby-code-title{margin-bottom:-0.6rem;padding:0.5em 1rem;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;background-color:#2d2d2d;border-bottom:6px solid #222;color:#ccc;z-index:0;font-size:0.8125rem;border-top-left-radius:0.3em;border-top-right-radius:0.3em;}.css-t1cjpf span[class^='badge-']{padding:0.125rem 0.3125rem;font-size:0.875rem;border-radius:0.1875rem;vertical-align:middle;font-size:0.8125rem;}.css-t1cjpf .badge-success{color:#254f08;background:#d2e9c1;}.css-t1cjpf .badge-danger{color:#b1380b;background:#ffded2;}</style><div class="css-t1cjpf e323yzu0"><blockquote>
+<p>서버로부터 데이터 가져오기, 캐싱, 캐싱제어</p>
+</blockquote>
+<h2 id="nextjs-캐싱과-차이점" style="position:relative;"><a href="#nextjs-%EC%BA%90%EC%8B%B1%EA%B3%BC-%EC%B0%A8%EC%9D%B4%EC%A0%90" aria-label="nextjs 캐싱과 차이점 permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Next.js 캐싱과 차이점</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left"> </th>
+<th align="left">Next.js</th>
+<th align="left">TanStack Query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> </td>
+<td align="left"><code class="language-text">fetch(url, {next: revalidate})</code></td>
+<td align="left"><code class="language-text">staleTime</code></td>
+</tr>
+<tr>
+<td align="left">저장 위치</td>
+<td align="left">Next.js 서버</td>
+<td align="left">사용자 브라우저 메모리</td>
+</tr>
+<tr>
+<td align="left">대상</td>
+<td align="left">모든 사용자(공용)</td>
+<td align="left">해당 사용자</td>
+</tr>
+<tr>
+<td align="left">목적</td>
+<td align="left">외부 API 호출 횟수 감소</td>
+<td align="left">불필요한 재요청 감소</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="vite-구성" style="position:relative;"><a href="#vite-%EA%B5%AC%EC%84%B1" aria-label="vite 구성 permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Vite 구성</h2>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  QueryClient<span class="token punctuation">,</span>
+  QueryClientProvider<span class="token punctuation">,</span>
+  useQuery<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@tanstack/react-query'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ReactQueryDevtools <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@tanstack/react-query-devtools'</span>
+
+<span class="token keyword">const</span> queryClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">QueryClientProvider</span></span> <span class="token attr-name">client</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>queryClient<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">ReactQueryDevtools</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Example</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">QueryClientProvider</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h2 id="nextjs-구성-server-렌더링" style="position:relative;"><a href="#nextjs-%EA%B5%AC%EC%84%B1-server-%EB%A0%8C%EB%8D%94%EB%A7%81" aria-label="nextjs 구성 server 렌더링 permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Next.js 구성 (Server 렌더링)</h2>
+<ul>
+<li><code class="language-text">QueryClientProvider</code> 사용시 전체(layout)를 Client Component로 변환해야하는 문제
+<ul>
+<li>Client Component만 사용 시 JS 번들크기 증가, 초기 로딩 속도 저하</li>
+</ul>
+</li>
+</ul>
+<h3><code class="language-text">queryClient</code> 생성 후 <code class="language-text">QueryClientProvider</code>로 감싸기</h3>
+<div class="gatsby-code-title">src/providers/TanstackProvider.tsx</div>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token string">'use client'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ReactNode <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> environmentManager<span class="token punctuation">,</span> QueryClient<span class="token punctuation">,</span> QueryClientProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@tanstack/react-query'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">makeQueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">QueryClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    defaultOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+      queries<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// refetch 방지 위해 0보다 크게</span>
+        staleTime<span class="token operator">:</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> browserQueryClient<span class="token operator">:</span> QueryClient <span class="token operator">|</span> <span class="token keyword">undefined</span> <span class="token operator">=</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">getQueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>environmentManager<span class="token punctuation">.</span><span class="token function">isServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 서버일 경우 항상 new 생성</span>
+    <span class="token keyword">return</span> <span class="token function">makeQueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// new QueryClient 없을 때 생성</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>browserQueryClient<span class="token punctuation">)</span> browserQueryClient <span class="token operator">=</span> <span class="token function">makeQueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> browserQueryClient<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">TanstackProvider</span><span class="token punctuation">(</span><span class="token punctuation">{</span> children <span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span> children<span class="token operator">:</span> ReactNode <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> queryClient <span class="token operator">=</span> <span class="token function">getQueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">QueryClientProvider</span></span> <span class="token attr-name">client</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>queryClient<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">QueryClientProvider</span></span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<div class="gatsby-code-title">/app/layout.tsx</div>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> TanstackProvider <span class="token keyword">from</span> <span class="token string">'@/providers/TanstackProvider'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">RootLayout</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  children<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token operator">:</span> Readonly<span class="token operator">&lt;</span><span class="token punctuation">{</span>
+  children<span class="token operator">:</span> React<span class="token punctuation">.</span>ReactNode<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ko<span class="token punctuation">"</span></span> <span class="token attr-name">className</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">h-full antialiased</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>flex min-h-full flex-col<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">TanstackProvider</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">TanstackProvider</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h3>Server Component</h3>
+<div class="gatsby-code-title">/page.tsx</div>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> queryClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">await</span> queryClient<span class="token punctuation">.</span><span class="token function">prefetchQuery</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    queryKey<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'posts'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    queryFn<span class="token operator">:</span> getPosts<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">HydrationBoundary</span></span> <span class="token attr-name">state</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token function">dehydrate</span><span class="token punctuation">(</span>queryClient<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Posts</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">HydrationBoundary</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h3>Client Component</h3>
+<ul>
+<li>Server Component 에서 <code class="language-text">prefetchQuery</code> 했다면 <code class="language-text">useQuery</code>(같은 <code class="language-text">queryKey</code>) 어디든(server, client) 사용 가능</li>
+</ul>
+<div class="gatsby-code-title">/page.tsx</div>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token string">'use client'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Posts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> data <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useQuery</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    queryKey<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'posts'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// prefetch한 데이터</span>
+    <span class="token function-variable function">queryFn</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">getPosts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> commentsData <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useQuery</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    queryKey<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'posts-comments'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 나중에 보여도 되는 데이터</span>
+    queryFn<span class="token operator">:</span> getComments<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+	<span class="token operator">...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li>Server prefetch : 중요하거나 화면에 먼저 보여야하는 데이터 (SEO 향상, 게시글 본문)</li>
+<li>Client : 유저 상호작용 데이터 (댓글 목록, 추천 상품)</li>
+</ul>
+<h2 id="prefetchquery" style="position:relative;"><a href="#prefetchquery" aria-label="prefetchquery permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>prefetchQuery</h2>
+<ul>
+<li>queryClient에 직접 호출하는 비동기 매서드</li>
+<li>호출 즉시 데이터 캐시(리렌더링 없이), Promise 반환 (await)</li>
+<li>데이터 사용하려면 <code class="language-text">useQuery</code>나 <code class="language-text">useSuspenseQuery</code> 사용</li>
+</ul>
+<h2 id="hydrationboundary" style="position:relative;"><a href="#hydrationboundary" aria-label="hydrationboundary permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HydrationBoundary</h2>
+<ul>
+<li><code class="language-text">dehydrate</code> 함수를 사용해 직렬화 : <code class="language-text">queryClient</code> 상태를 JSON으로 직렬화 후</li>
+</ul>
+<p>→ 클라이언트(<code class="language-text">&lt;HydrationBoundary></code> state props)에 전달, 클라이언트에서 복원</p>
+<h2 id="usequery" style="position:relative;"><a href="#usequery" aria-label="usequery permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>useQuery</h2>
+<blockquote>
+<p>기본 쿼리 훅</p>
+</blockquote>
+<ul>
+<li>컴포넌트에서 데이터 가져올 때 사용</li>
+</ul>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> someReturn <span class="token operator">=</span> <span class="token function">useQuery</span><span class="token punctuation">(</span>옵션<span class="token punctuation">)</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">useSome</span> <span class="token operator">=</span> <span class="token punctuation">(</span>query<span class="token operator">:</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token function">useQuery</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+		queryKey<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'데이터 키'</span><span class="token punctuation">,</span> query<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token function-variable function">queryFn</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+			<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/someApi?t=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">encodeURIComponent</span><span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">.</span>ok<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'Search error'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span><span class="token punctuation">,</span>
+		enabled<span class="token operator">:</span> <span class="token operator">!</span><span class="token operator">!</span>query<span class="token punctuation">,</span>
+    staleTime<span class="token operator">:</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li><code class="language-text">queryKey</code> 고유 쿼리 키 (필수 옵션)</li>
+</ul>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// 단순 목록</span>
+queryKey<span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'데이터 키'</span><span class="token punctuation">]</span>
+<span class="token comment">// 특정 유저 목록</span>
+queryKey<span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'데이터 키'</span><span class="token punctuation">,</span> userId<span class="token punctuation">]</span>
+<span class="token comment">// 특정 유저 + 상세</span>
+queryKey<span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'데이터 키'</span><span class="token punctuation">,</span> userId<span class="token punctuation">,</span> trackId<span class="token punctuation">]</span></code></pre></div>
+<ul>
+<li><code class="language-text">queryFn</code> 데이터 반환, 오류 (필수 옵션)</li>
+<li><code class="language-text">enabled</code> 쿼리 자동 실행 여부</li>
+<li><code class="language-text">staleTime</code> 데이터 stale 시간(ms)</li>
+</ul>
+<h3>useQuery 방식 사용 예시 (Client Component)</h3>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">const</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> someData<span class="token punctuation">,</span> isPending<span class="token punctuation">,</span> isError<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useSomeData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> mutate<span class="token operator">:</span> addData<span class="token punctuation">,</span> isPending<span class="token operator">:</span> isAddDataPending<span class="token punctuation">,</span> isError<span class="token operator">:</span> addDataError <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useAddData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isPending<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">></span></span><span class="token plain-text">Data Loading</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>someData <span class="token operator">||</span> someData<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">></span></span><span class="token plain-text">Data 0</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isAddDataPending<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">></span></span><span class="token plain-text">데이터 추가할 때 Loading</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isError <span class="token operator">||</span> addDataError<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">></span></span><span class="token plain-text">Error</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">handler</span> <span class="token operator">=</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">{</span>
+	<span class="token function">addData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h2 id="usesuspensequery-queryerrorresetboundary" style="position:relative;"><a href="#usesuspensequery-queryerrorresetboundary" aria-label="usesuspensequery queryerrorresetboundary permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>useSuspenseQuery, QueryErrorResetBoundary</h2>
+<ul>
+<li>Loading, Error를 트리 레벨에서 한 번에 관리 (직관적)
+<ul>
+<li>Pendign : throw → 가장 가까운 <code class="language-text">&lt;Suspense></code>(React) fallback이 Loading</li>
+<li>에러 : throw → <code class="language-text">&lt;ErrorBoundary></code>(React) 이 catch</li>
+</ul>
+</li>
+</ul>
+<h3>Suspense (React)</h3>
+<ul>
+<li>React에서 컴포넌트가 비동기 작업을 수행하는 동안 로딩 상태 관리하는 기능</li>
+<li>Suspense 컴포넌트 사용 (status 지정) → Tanstack Query의 suspense옵션 활성화</li>
+</ul>
+<h3>ErrorBoundary (React)</h3>
+<ul>
+<li>React에서 컴포넌트 트리 내의 오류를 잡아내 대체 UI 표시</li>
+</ul>
+<h3>React 사용 예시</h3>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">{</span> Suspense <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ErrorBoundary <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-error-boundary'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> QueryClient<span class="token punctuation">,</span> QueryClientProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@tanstack/react-query'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> queryClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  defaultOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+    queries<span class="token operator">:</span> <span class="token punctuation">{</span>
+      suspense<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">ErrorFallback</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>error<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token punctuation">{</span>error<span class="token punctuation">.</span>message<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">QueryClientProvider</span></span> <span class="token attr-name">client</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>queryClient<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">ErrorBoundary</span></span> <span class="token attr-name">FallbackComponent</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>ErrorFallback<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Suspense</span></span> <span class="token attr-name">fallback</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Loading</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Example</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Suspense</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">ErrorBoundary</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">QueryClientProvider</span></span><span class="token punctuation">></span></span>
+<span class="token punctuation">)</span></code></pre></div>
+<h3>Next.js (App Router) 사용 예시</h3>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">Home</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> queryClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> queryClient<span class="token punctuation">.</span><span class="token function">prefetchQuery</span><span class="token punctuation">(</span>trackQueries<span class="token punctuation">.</span><span class="token function">mainPlaylist</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">/*
+  await queryClient.prefetchQuery({
+    queryKey: trackKeys.mainPlaylist(),
+    queryFn: () => trackService.getMainPlaylistTracks(),
+  });
+  */</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>main</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>flex w-full max-w-3xl flex-1 flex-col<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">HydrationBoundary</span></span> <span class="token attr-name">state</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token function">dehydrate</span><span class="token punctuation">(</span>queryClient<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">QueryAsyncBoundary</span></span> <span class="token attr-name">pendingFallback</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Skeleton</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">MainBnr</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">QueryAsyncBoundary</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">HydrationBoundary</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Link</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/login<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">Login</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>main</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<div class="gatsby-code-title">src/component/QueryAsyncBoundary.tsx</div>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token string">'use client'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> QueryErrorResetBoundary <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@tanstack/react-query'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ReactNode<span class="token punctuation">,</span> Suspense <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ErrorBoundary <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-error-boundary'</span><span class="token punctuation">;</span>
+<span class="token keyword">interface</span> <span class="token class-name">AsyncBoundaryProps</span> <span class="token punctuation">{</span>
+  children<span class="token operator">:</span> ReactNode<span class="token punctuation">;</span>
+  pendingFallback<span class="token operator">:</span> ReactNode<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">QueryAsyncBoundary</span><span class="token punctuation">(</span><span class="token punctuation">{</span> children<span class="token punctuation">,</span> pendingFallback <span class="token punctuation">}</span><span class="token operator">:</span> AsyncBoundaryProps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">QueryErrorResetBoundary</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">{</span> reset <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">ErrorBoundary</span></span>
+          <span class="token attr-name">onReset</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>reset<span class="token punctuation">}</span></span>
+          <span class="token attr-name">fallbackRender</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">{</span> error<span class="token punctuation">,</span> resetErrorBoundary <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+              에러가 발생했습니다.
+              </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>resetErrorBoundary<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">다시 시도</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+          <span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+        <span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Suspense</span></span> <span class="token attr-name">fallback</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>pendingFallback<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Suspense</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">ErrorBoundary</span></span><span class="token punctuation">></span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">QueryErrorResetBoundary</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<div class="gatsby-code-title">MainBnr.tsx</div>
+<div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token operator">...</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> data <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useSuspenseQuery</span><span class="token punctuation">(</span>trackQueries<span class="token punctuation">.</span><span class="token function">mainPlaylist</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span></code></pre></div>
+<h2 id="usemutation" style="position:relative;"><a href="#usemutation" aria-label="usemutation permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>useMutation</h2>
+<blockquote>
+<p>데이터 변경작업</p>
+</blockquote>
+<ul>
+<li>성공, 실패, 로딩 상태</li>
+<li>요청 실패 시 자동 재시도, 데이터 Placeholder (Optimistic Update)</li>
+</ul>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> queryClient <span class="token operator">=</span> <span class="token function">useQueryClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 기존 캐시 무효화 -> 새로 가져오기</span>
+<span class="token keyword">return</span> <span class="token function">useMutation</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	<span class="token function-variable function">mutationFn</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token operator">=></span> <span class="token punctuation">{</span>
+		<span class="token operator">...</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token function-variable function">onError</span><span class="token operator">:</span><span class="token punctuation">(</span>error<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token operator">=></span> error<span class="token punctuation">,</span>
+	<span class="token function-variable function">onSuccess</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+		queryClient<span class="token punctuation">.</span><span class="token function">invalidateQueries</span><span class="token punctuation">(</span><span class="token punctuation">{</span> queryKey<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'데이터 키 1'</span><span class="token punctuation">,</span> <span class="token string">'데이터 키 2'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		queryClient<span class="token punctuation">.</span><span class="token function">invalidateQueries</span><span class="token punctuation">(</span><span class="token punctuation">{</span> queryKey<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'데이터 키 1'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<ul>
+<li><code class="language-text">mutationFn</code> 실행할 비동기 변이 함수 (필수 옵션)</li>
+<li><code class="language-text">onSuccess</code> 변이 성공 후 호출</li>
+</ul>
+<h2 id="skeleton-처리" style="position:relative;"><a href="#skeleton-%EC%B2%98%EB%A6%AC" aria-label="skeleton 처리 permalink" class="link-headers before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Skeleton 처리</h2>
+<ul>
+<li><code class="language-text">isLoading</code> 또는 Suspense로 처리</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="left"> </th>
+<th align="left"> </th>
+<th align="left"> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="language-text">isFetcing</code></td>
+<td align="left">API요청 진행 중</td>
+<td align="left">데이터 그대로 둔 채 데이터 업데이트</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">isPending</code></td>
+<td align="left">캐시 없음</td>
+<td align="left">데이터 추가/수정 (저장 중)</td>
+</tr>
+<tr>
+<td align="left"><code class="language-text">isLoading</code></td>
+<td align="left"><code class="language-text">isFetcing</code> + <code class="language-text">isPending</code></td>
+<td align="left">초기 화면</td>
+</tr>
+</tbody>
+</table></div></div><div></div><style data-emotion="css 1jrldt6">.css-1jrldt6{display:grid;margin:0 auto;padding:3rem 0 2.5rem;}</style><footer class="css-1jrldt6 e1msbxce1"><style data-emotion="css pw0llt">.css-pw0llt{margin-top:0.75rem;color:#636363;font-size:0.8125rem;text-align:center;}</style><p class="css-pw0llt e1msbxce0">© 2026 Choi Seohee. All Rights Reserved.</p></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/tanstack-query/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-1e4bf8598be9e4421fc7.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-8a74a841a3266e3b5e38.js\"],\"component---src-pages-index-tsx\":[],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx-955b84999181d3f61f6b.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="15c6232794ee36466b05";</script><script src="/gatsby-archive/webpack-runtime-16017e0074101bbbb339.js" async></script><script src="/gatsby-archive/app-1e4bf8598be9e4421fc7.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
