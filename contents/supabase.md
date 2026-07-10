@@ -1,6 +1,6 @@
 ---
 date: '2026-05-24'
-title: 'Supabase'
+title: 'Supabase 정리'
 categories: ['Modern Stack']
 summary: 'Supabase 사용법과 Next 16 세팅방법'
 thumbnail: './supabase.png'

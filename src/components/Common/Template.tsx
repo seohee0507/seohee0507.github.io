@@ -34,8 +34,13 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
 
         <link rel="icon" href="/gatsby-archive/favicon.ico" />
-        <link rel="icon" href="/gatsby-archive/favicon.png" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="//gatsby-archive/apple-touch-icon.png" sizes="180x180" />
+        <link rel="icon" href="/gatsby-archive/favicon.png" type="image/png" sizes="48x48" />
+        <link rel="apple-touch-icon" href="/gatsby-archive/apple-touch-icon.png" sizes="180x180" />
+        <link
+          rel="apple-touch-icon-precomposed"
+          href="/gatsby-archive/apple-touch-icon-precomposed.png"
+          sizes="180x180"
+        />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />

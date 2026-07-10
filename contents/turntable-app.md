@@ -1,6 +1,6 @@
 ---
 date: '2026-06-20'
-title: 'Turntable 웹앱'
+title: 'Turntable 플레이리스트'
 categories: ['Visual UI']
 summary: '음악 플레이리스트 웹앱 디자인하고 Framer Motion 사용해보기'
 thumbnail: './turntable-app.png'
@@ -43,6 +43,10 @@ thumbnail: './turntable-app.png'
 ### 비주얼 디자인
 - 시각적 위계
 - 텍스트 가독성 : 앨범커버에 이미지 그라데이션 블러 추가
+
+## 구현 순서
+1. 
+
 
 ## 로그인, 회원가입
 - [Supabase의 Auth](/supabase/#next-16--supabase-auth)
