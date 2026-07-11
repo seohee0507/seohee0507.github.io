@@ -33,12 +33,14 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
 
-        <link rel="icon" href="/gatsby-archive/favicon.ico" />
-        <link rel="icon" href="/gatsby-archive/favicon.png" type="image/png" sizes="48x48" />
-        <link rel="apple-touch-icon" href="/gatsby-archive/apple-touch-icon.png" sizes="180x180" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.png" sizes="48x48" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link
           rel="apple-touch-icon-precomposed"
-          href="/gatsby-archive/apple-touch-icon-precomposed.png"
+          href="/apple-touch-icon-precomposed.png"
           sizes="180x180"
         />
 
@@ -47,9 +49,7 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta property="og:description" content={description} />
         <meta
           property="og:image"
-          content={`https://seohee0507.github.io${
-            image === undefined ? '/gatsby-archive/og.png' : image
-          }`}
+          content={`https://seohee0507.github.io${image === undefined ? '/og.png' : image}`}
         />
         <meta property="og:image:width" content="768" />
         <meta property="og:image:height" content="432" />
@@ -61,9 +61,7 @@ const Template: FunctionComponent<TemplateProps> = ({
         <meta name="twitter:description" content={description} />
         <meta
           name="twitter:image"
-          content={`https://seohee0507.github.io${
-            image === undefined ? '/gatsby-archive/og.png' : image
-          }`}
+          content={`https://seohee0507.github.io${image === undefined ? '/og.png' : image}`}
         />
         <meta name="twitter:site" content={url} />
         <meta name="twitter:creator" content="Choi Seohee" />

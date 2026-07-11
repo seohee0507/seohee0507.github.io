@@ -3,7 +3,7 @@
   "private": true,
   "description": "SEOHEE archive",
   "version": "0.1.0",
-  "author": "Choi Seohee",
+  "author": "Seohee",
   "homepage": "/gatsby-archive",
   "dependencies": {
     "@emotion/react": "^11.14.0",

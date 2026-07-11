@@ -8,12 +8,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: '/gatsby-archive',
+  //pathPrefix: `/gatsby-archive`,
   siteMetadata: {
     title: `SEOHEE Archive`,
     description: `SEOHEE Archive`,
-    author: `Choi Seohee`,
-    siteUrl: `https://seohee0507.github.io/gatsby-archive`,
+    author: `Seohee`,
+    siteUrl: `https://seohee0507.github.io`,
   },
   plugins: [
     {
@@ -131,7 +131,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://seohee0507.github.io/gatsby-archive`,
+        siteUrl: `https://seohee0507.github.io`,
         stripQueryString: true,
       },
     },

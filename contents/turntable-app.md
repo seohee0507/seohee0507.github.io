@@ -44,9 +44,13 @@ thumbnail: './turntable-app.png'
 - 시각적 위계
 - 텍스트 가독성 : 앨범커버에 이미지 그라데이션 블러 추가
 
-## 구현 순서
-1. 
+## 구현
+1. 플레이리스트 데이터 스키마 설계 및 데이터 구축
+  - 데이터 생성  
+    - YouTube API : 
+  - 데이터 저장 &rightarrow; Supabase
 
+2. 
 
 ## 로그인, 회원가입
 - [Supabase의 Auth](/supabase/#next-16--supabase-auth)
